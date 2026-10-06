@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="bs" data-season="winter">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Casa Montana · Apartmani Vlašić</title>
+<meta name="description" content="Casa Montana, apartmani na Vlašiću. Pogledajte apartmane i pošaljite upit za termin direktno na Viber ili WhatsApp.">
+<!-- DEMO: ukloni ovaj red za pravog klijenta (vidi README, "SEO") -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#24483a">
+<link rel="canonical" href="https://casa-montana.grabafaceit.workers.dev/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Casa Montana · Apartmani Vlašić">
+<meta property="og:description" content="Apartmani na Vlašiću. Pošaljite upit za termin direktno na Viber ili WhatsApp.">
+<meta property="og:image" content="https://casa-montana.grabafaceit.workers.dev/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://casa-montana.grabafaceit.workers.dev/">
+<meta property="og:locale" content="bs_BA">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Casa Montana Vlašić Apartments",
+  "url": "https://casa-montana.grabafaceit.workers.dev/",
+  "image": "https://casa-montana.grabafaceit.workers.dev/assets/og.jpg",
+  "address": { "@type": "PostalAddress", "addressLocality": "Vlašić", "addressCountry": "BA" },
+  "sameAs": ["https://www.instagram.com/casa.montana.vlasic/"]
+}
+</script>
+<script>
+  /* sezona prije crtanja, da ne trepne pogrešna boja */
+  (function () {
+    try {
+      var s = localStorage.getItem('planinka-season');
+      if (!s) { var m = new Date().getMonth() + 1; s = [11, 12, 1, 2, 3, 4].indexOf(m) !== -1 ? 'winter' : 'summer'; }
+      document.documentElement.setAttribute('data-season', s);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Preskoči na sadržaj</a>
+<header class="topbar" id="topbar"></header>
+<section class="hero" id="top" aria-label="Casa Montana"></section>
+<main id="main" tabindex="-1">
+  <noscript><div class="wrap" style="padding:120px 0"><h1>Casa Montana · Apartmani Vlašić</h1><p>Za pun prikaz stranice uključi JavaScript. Instagram: @casa.montana.vlasic</p></div></noscript>
+</main>
+<footer class="foot" id="foot"></footer>
+<nav class="dock" id="dock" aria-label="Brzi kontakt"></nav>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Galerija" hidden></div>
+
+<script src="data/vikendica.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/scenes.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
