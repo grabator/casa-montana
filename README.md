@@ -12,7 +12,10 @@ Dobijeno od vlasnika (upisano):
 - [x] naziv: Casa Montana Vlašić Apartmani, planinski apartmani na Vlašiću
 - [x] slogan: kamin, mir i pogled na planinu
 - [x] Apartman 1 do 4 osobe, Apartman 2 do 10 osoba, cijela vikendica do 14 osoba
-- [x] lokacija okvirno: Babanovac, Vlašić
+- [x] lokacija: centar Babanovca, Vlašić (tačan pin još fali)
+- [x] otvaranje 20.10.2026 (na prvom ekranu "Otvaramo 20.10.", poslije otvaranja zamijeniti u `heroChips`)
+- [x] sa Instagrama: kafe aparati u oba apartmana, podno grijanje i toplotna pumpa, moderno kupatilo, Apartman 1 ima dnevnu sobu, kuhinju, kupatilo i spavaću sobu
+- [x] boje i crteži po uzoru na Instagram: antracit, bronza i krem; kuća sa strmim krovom i solarnim panelima, moderno kupatilo, dnevna soba
 - [x] cijene: na upit
 
 Od vlasnika još treba:
@@ -20,7 +23,7 @@ Od vlasnika još treba:
 - [ ] Google Maps link (tačna lokacija)
 - [ ] fotografije apartmana (stižu za 5 do 6 dana) i po želji video za prvi ekran
 - [ ] raspored kreveta u svakom apartmanu (bračni, odvojeni, kauč)
-- [ ] potvrda sadržaja: Wi-Fi, kuhinja, TV, posteljina, ljubimci, roštilj... (kamin i parking su potvrđeni)
+- [ ] potvrda sadržaja: Wi-Fi, parking, kuhinja, TV, posteljina, ljubimci, roštilj... (kamin, kafe aparati, podno grijanje i kupatilo su potvrđeni)
 - [ ] tačne udaljenosti (staza, centar Babanovca)
 - [ ] kućni red i pitanja (check-in, check-out, ljubimci...), ako žele tu sekciju
 

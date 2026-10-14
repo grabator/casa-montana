@@ -86,6 +86,60 @@
     return g;
   }
 
+
+  /* kuća sa strmim krovom (Casa Montana): bijeli zidovi, antracit krov, solarni paneli, drvene škure, stepenice */
+  function house(x, y, s) {
+    function pt(u, v) { return [(-4 + 140 * u + 216 * v).toFixed(1), (-240 - 40 * u + 268 * v).toFixed(1)]; }
+    function side(t, yy) { return [(190 + 140 * t).toFixed(1), (yy - 40 * t).toFixed(1)]; }
+    function poly(a) { return a.map(function (q) { return q.join(','); }).join(' '); }
+    function sideWin(t0, t1, y0, y1, lit) {
+      return '<polygon points="' + poly([side(t0, y0), side(t1, y0), side(t1, y1), side(t0, y1)]) + '" class="' + (lit ? 'glass-light' : 'glass') + '"/>' +
+        '<polygon points="' + poly([side(t0, y0), side(t1, y0), side(t1, y1), side(t0, y1)]) + '" class="h-frame"/>';
+    }
+    function frontWin(cx, y0, w, h, lit) {
+      return '<rect x="' + (cx - w / 2 - 18) + '" y="' + y0 + '" width="16" height="' + h + '" rx="2" class="wood-dark"/>' +
+        '<rect x="' + (cx + w / 2 + 2) + '" y="' + y0 + '" width="16" height="' + h + '" rx="2" class="wood-dark"/>' +
+        '<rect x="' + (cx - w / 2) + '" y="' + y0 + '" width="' + w + '" height="' + h + '" class="' + (lit ? 'glass-light' : 'glass') + '"/>' +
+        '<path d="M' + cx + ' ' + y0 + 'V' + (y0 + h) + '" class="h-bar"/><rect x="' + (cx - w / 2) + '" y="' + y0 + '" width="' + w + '" height="' + h + '" class="h-frame"/>';
+    }
+    var g = '<g class="cabin house" transform="translate(' + x + ' ' + y + ') scale(' + s + ')">';
+    g += '<ellipse cx="60" cy="214" rx="360" ry="26" class="cabin-shadow"/>';
+    /* bočni zid i prozori */
+    g += '<polygon points="190,212 330,172 330,-30 190,10" class="h-side"/>';
+    g += sideWin(0.22, 0.42, 60, 120, true) + sideWin(0.6, 0.8, 60, 120, false) + sideWin(0.32, 0.62, -10, 30, true);
+    /* krov sa strane, solarni paneli, snijeg */
+    g += '<polygon points="' + poly([pt(-0.02, -0.03), pt(1.06, -0.03), pt(1.06, 1.06), pt(-0.02, 1.06)]) + '" class="roof"/>';
+    [0, 1, 2].forEach(function (i) {
+      [0, 1].forEach(function (j) {
+        var u0 = 0.18 + i * 0.24, v0 = 0.3 + j * 0.24;
+        g += '<polygon points="' + poly([pt(u0, v0), pt(u0 + 0.22, v0), pt(u0 + 0.22, v0 + 0.22), pt(u0, v0 + 0.22)]) + '" class="solar"/>';
+      });
+    });
+    g += '<polygon points="' + poly([pt(-0.02, -0.03), pt(1.06, -0.03), pt(1.06, 0.2), pt(-0.02, 0.2)]) + '" class="roof-snow"/>';
+    /* dimnjak i dim */
+    g += '<rect x="96" y="-318" width="30" height="104" class="chimney"/><rect x="91" y="-324" width="40" height="10" class="chimney-top"/>';
+    g += '<g class="smoke" transform="translate(-155 -230)"><circle cx="267" cy="-100" r="16"/><circle cx="280" cy="-140" r="22"/><circle cx="300" cy="-190" r="28"/></g>';
+    /* prednji zid sa zabatom */
+    g += '<polygon points="-190,212 -190,10 0,-230 190,10 190,212" class="h-wall"/>';
+    g += '<rect x="-190" y="196" width="380" height="16" class="h-base"/>';
+    /* prozori: potkrovlje, sprat, prizemlje */
+    g += frontWin(0, -120, 44, 58, true);
+    g += frontWin(-105, 30, 54, 62, false) + frontWin(105, 30, 54, 62, true);
+    g += '<rect x="-40" y="22" width="80" height="78" class="glass"/><rect x="-40" y="22" width="80" height="78" class="h-frame"/><path d="M0 22V100" class="h-bar"/>';
+    g += '<rect x="-70" y="96" width="140" height="10" rx="2" class="wood-dark"/><path d="M-66 100V68M-40 100V68M-14 100V68M14 100V68M40 100V68M66 100V68M-70 68H70" class="h-rail"/>';
+    g += frontWin(-105, 128, 54, 62, true) + frontWin(105, 128, 54, 62, false);
+    g += '<rect x="-24" y="128" width="48" height="84" rx="3" class="wood-dark"/><circle cx="14" cy="172" r="3" class="h-knob"/>';
+    g += '<g class="lantern"><rect x="34" y="136" width="10" height="16" rx="3"/><circle cx="39" cy="144" r="18" class="lantern-glow"/></g>';
+    /* krov sprijeda (strehe) i snijeg */
+    g += '<path d="M-214 34 L0 -250 L214 34" class="h-fascia"/>';
+    g += '<path d="M-214 26 L0 -258 L214 26" class="h-fascia-snow"/>';
+    /* stepenice uz kuću */
+    for (var k = 0; k < 6; k++) g += '<rect x="' + (-330 + k * 24) + '" y="' + (212 - (k + 1) * 14) + '" width="' + (144 - k * 24 + 24) + '" height="14" class="h-step"/>';
+    g += '<path d="M-322 170 L-200 96 M-322 170 V198 M-262 134 V170 M-204 98 V128" class="h-rail"/>';
+    g += '</g>';
+    return g;
+  }
+
   function ground() {
     return (
       '<path class="ground" d="M0 760 Q400 690 800 740 T1600 720 V1000 H0Z"/>' +
@@ -104,7 +158,7 @@
       return '<svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" class="scene scene-ext" aria-hidden="true">' +
         sky(id) + mountains() +
         '<g class="far">' + forest(7, 26, -40, 1640, 650, 70, 120, 'far-pine') + '</g>' +
-        ground() + cabin(850, 545, 1) +
+        ground() + ((window.VIKENDICA || {}).houseStyle === 'house' ? house(1010, 548, 0.92) : cabin(850, 545, 1)) +
         forest(13, 6, -60, 520, 860, 170, 260) + forest(29, 6, 1180, 1660, 850, 170, 270) +
         '</svg>';
     },
@@ -248,6 +302,77 @@
       '<ellipse cx="110" cy="420" rx="44" ry="22" fill="#d9a35f"/><ellipse cx="165" cy="424" rx="38" ry="18" fill="#c98f4c"/><path d="M90 412 l10 10 M112 408 l10 10 M150 418 l8 8" stroke="#a8743c" stroke-width="4" stroke-linecap="round"/>' +
       /* staklenka meda / džema */
       '<rect x="700" y="400" width="54" height="66" rx="12" fill="#e2a23a" opacity=".9"/><rect x="696" y="390" width="62" height="16" rx="6" fill="#8a5f3a"/>' +
+      '</svg>';
+  };
+
+
+  /* moderno kupatilo: beton, hrast, okruglo LED ogledalo, lavabo na drvenoj ploči, tuš kabina, viseći WC */
+  SCENES.bathModern = function () {
+    var id = uid('led');
+    return '<svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" class="scene" aria-hidden="true">' +
+      '<defs><radialGradient id="' + id + '"><stop offset="0.62" stop-color="#fff6e0" stop-opacity=".95"/><stop offset="0.78" stop-color="#ffe9b8" stop-opacity=".35"/><stop offset="1" stop-color="#ffe9b8" stop-opacity="0"/></radialGradient></defs>' +
+      '<rect width="800" height="600" fill="#6f6d69"/>' +
+      Array.apply(null, Array(5)).map(function (_, i) { return '<path d="M' + (i * 160) + ' 0V470" stroke="#62605c" stroke-width="2"/>'; }).join('') +
+      '<path d="M0 160H520M0 320H520" stroke="#62605c" stroke-width="2"/>' +
+      /* hrastov zid sa nišom */
+      '<rect x="540" y="0" width="260" height="470" fill="#9b6a3c"/>' +
+      Array.apply(null, Array(9)).map(function (_, i) { return '<path d="M540 ' + (i * 52 + 26) + 'H800" stroke="#86592f" stroke-width="3"/>'; }).join('') +
+      '<rect x="590" y="40" width="160" height="190" fill="#5d5a55"/><rect x="590" y="130" width="160" height="10" fill="#b07a46"/>' +
+      '<rect x="604" y="98" width="22" height="32" rx="4" fill="#2a2a2a"/><rect x="634" y="108" width="16" height="22" rx="4" fill="#d9d2c4"/>' +
+      '<rect x="690" y="186" width="30" height="44" rx="6" fill="#34403a"/><path d="M705 186 q-40 -40 -14 -80 q10 40 14 80 q8 -60 40 -78 q-6 50 -40 78" fill="#5f8a55"/>' +
+      /* viseći WC i tipka */
+      '<rect x="640" y="290" width="54" height="30" rx="4" fill="#efeee9"/>' +
+      '<path d="M600 380 h120 v20 q0 52 -60 52 h-40 q-20 0 -20 -20z" fill="#f4f3ef"/>' +
+      /* staklo tuš kabine i tuš */
+      '<rect x="452" y="30" width="70" height="470" fill="#cfe2e6" opacity=".18"/><rect x="452" y="30" width="5" height="470" fill="#1d1d1d"/><path d="M455 30H560" stroke="#1d1d1d" stroke-width="5"/>' +
+      '<rect x="476" y="40" width="44" height="8" rx="3" fill="#1d1d1d"/>' +
+      /* LED ogledalo */
+      '<circle cx="250" cy="170" r="138" fill="url(#' + id + ')" class="led-glow"/>' +
+      '<circle cx="250" cy="170" r="92" fill="#b9bcb9"/><circle cx="250" cy="170" r="92" fill="none" stroke="#fffaf0" stroke-width="7"/>' +
+      '<path d="M200 120 l40 40 M222 106 l50 50" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".35"/>' +
+      /* ploča od hrasta, crni ram, lavabo, crna slavina */
+      '<rect x="110" y="338" width="300" height="22" rx="3" fill="#a8743f"/><path d="M120 360V470M400 360V470M120 430H400" stroke="#1d1d1d" stroke-width="7"/>' +
+      '<rect x="150" y="438" width="70" height="30" rx="5" fill="#d8ccb6"/>' +
+      '<ellipse cx="260" cy="318" rx="80" ry="24" fill="#f7f6f2"/><path d="M180 318 q80 50 160 0 v6 q-80 44 -160 0z" fill="#e3e1db"/>' +
+      '<path d="M344 338 V268 q0 -14 -14 -14 h-18" stroke="#1d1d1d" stroke-width="8" fill="none" stroke-linecap="round"/>' +
+      '<rect x="128" y="300" width="22" height="38" rx="6" fill="#3a463f"/><circle cx="133" cy="290" r="11" fill="#eaeae6"/><circle cx="146" cy="292" r="10" fill="#f3f1ea"/>' +
+      /* pod */
+      '<rect x="0" y="470" width="800" height="130" fill="#55534f"/><path d="M0 470H800" stroke="#4a4844" stroke-width="4"/>' +
+      '<path d="M120 470V600M300 470V600M500 470V600M680 470V600" stroke="#4d4b47" stroke-width="2"/>' +
+      '</svg>';
+  };
+
+  /* dnevni boravak: siva sjedeća garnitura, šareni (ćilim) puf, okrugli stočić, veliki prozor na jelke */
+  SCENES.lounge = function () {
+    var cp = uid('win');
+    return '<svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" class="scene" aria-hidden="true">' +
+      '<defs><clipPath id="' + cp + '"><rect x="470" y="40" width="290" height="330"/></clipPath></defs>' +
+      '<rect width="800" height="600" fill="#f1eee8"/>' +
+      /* prozor sa jelkama */
+      '<g clip-path="url(#' + cp + ')"><rect x="470" y="40" width="290" height="330" fill="#cfe0d6"/>' +
+      '<path d="M480 370 l40 -200 l40 200z M540 370 l50 -260 l50 260z M630 370 l40 -190 l40 190z M690 370 l45 -230 l45 230z" fill="#3f6b49"/>' +
+      '<path d="M500 280 l20 -110 l20 110z M565 240 l25 -130 l25 130z" fill="#5c8a5f"/>' +
+      '<g class="snowcap"><path d="M510 225 l10 -55 l10 55z M578 180 l12 -70 l12 70z M700 230 l12 -75 l12 75z" fill="#fff"/></g></g>' +
+      '<path d="M615 40V370M470 205H760" stroke="#fbfaf7" stroke-width="12"/><rect x="464" y="34" width="302" height="342" fill="none" stroke="#fbfaf7" stroke-width="14"/>' +
+      /* slika na zidu */
+      '<rect x="120" y="70" width="140" height="100" fill="#7d6a58"/><rect x="130" y="80" width="120" height="80" fill="#e8e1d4"/><path d="M140 150 l40 -40 l30 25 l25 -20 l15 35z" fill="#b9a68f"/>' +
+      /* pod i tepih */
+      '<rect x="0" y="430" width="800" height="170" fill="#b48a5e"/>' +
+      Array.apply(null, Array(5)).map(function (_, i) { return '<path d="M0 ' + (450 + i * 34) + 'H800" stroke="#a37a50" stroke-width="2"/>'; }).join('') +
+      '<ellipse cx="380" cy="520" rx="330" ry="60" fill="#6f7f78"/><ellipse cx="380" cy="520" rx="300" ry="48" fill="none" stroke="#859690" stroke-width="4" stroke-dasharray="10 8"/>' +
+      /* siva garnitura */
+      '<rect x="40" y="290" width="380" height="80" rx="18" fill="#a9a8a4"/>' +
+      '<rect x="30" y="350" width="400" height="80" rx="14" fill="#bdbcb8"/><path d="M160 352V428M290 352V428" stroke="#aaa9a5" stroke-width="3"/>' +
+      '<rect x="60" y="300" width="70" height="56" rx="12" fill="#3f6e68"/><rect x="330" y="306" width="62" height="50" rx="12" fill="#cfcac0"/>' +
+      /* okrugli stočić */
+      '<ellipse cx="520" cy="440" rx="80" ry="18" fill="#5a3f2b"/><rect x="514" y="440" width="12" height="50" fill="#1f1f1f"/><ellipse cx="520" cy="492" rx="44" ry="8" fill="#1f1f1f"/>' +
+      '<rect x="500" y="414" width="18" height="26" rx="3" fill="#2f3b35"/><rect x="530" y="420" width="24" height="18" rx="4" fill="#f4efe4"/>' +
+      /* ćilim puf */
+      '<g transform="translate(660 400)"><path d="M-70 110 q-20 -90 30 -150 q40 -30 80 10 q40 60 20 140z" fill="#efe3c8"/>' +
+      '<path d="M-40 10 l20 -20 l20 20 l-20 20z M10 40 l22 -22 l22 22 l-22 22z M-50 70 l18 -18 l18 18 l-18 18z" fill="#c4372b"/>' +
+      '<path d="M-20 60 l14 -14 l14 14 l-14 14z M30 -10 l12 -12 l12 12 l-12 12z" fill="#2d4f8f"/>' +
+      '<path d="M-60 40 l10 -10 l10 10 l-10 10z M20 90 l12 -12 l12 12 l-12 12z M-10 -30 l8 -8 l8 8 l-8 8z" fill="#e8a628"/>' +
+      '<path d="M-50 100 l10 -10 l10 10 l-10 10z M40 70 l8 -8 l8 8 l-8 8z" fill="#3d7d4a"/></g>' +
       '</svg>';
   };
 

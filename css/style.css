@@ -1,4 +1,5 @@
 /*
+ * Casa Montana boje: antracit, bronza/zlato i topla krem (kao na njihovom Instagramu).
  * Planinka - izgled. Boje obje sezone su varijable ispod (:root[data-season=...]).
  * Za drugu vikendicu obično dovoljno je promijeniti boje u ova dva bloka.
  */
@@ -11,25 +12,25 @@
 /* ---------- boje: zima ---------- */
 :root,
 :root[data-season='winter'] {
-  --bg: #f5f8fb; --bg-alt: #e9f0f6; --card: #ffffff; --ink: #11232f; --muted: #57697a; --line: rgba(17, 35, 47, 0.1);
-  --accent: #d9682b; --accent-ink: #b5521c; --accent-2: #24483a; --on-accent: #fff;
+  --bg: #f6f4f0; --bg-alt: #ebe7df; --card: #ffffff; --ink: #1f1d1a; --muted: #645f57; --line: rgba(31, 29, 26, 0.1);
+  --accent: #946628; --accent-ink: #7a531f; --accent-2: #2b2926; --on-accent: #fff;
   --sky-top: #8fbde0; --sky-bot: #eaf3fa; --sun: #fff8e6; --sun-glow: rgba(255, 248, 230, 0.55);
   --mtn-3: #bfd1df; --mtn-2: #94adc2; --snow-op: 1; --summer-op: 0;
   --pine: #21443a; --pine-far: #6c8a96; --trunk: #4a3426;
   --ground: #f3f7fa; --ground-2: #e2ecf3; --path: #d8e3ec;
-  --wood: #8a5a36; --wood-dark: #6b4428; --roof: #33261f; --glass: #24323c; --glass-light: #ffc56b; --deck: #6b4428;
+  --wood: #8a5a36; --wood-dark: #6b4428; --roof: #2f3236; --glass: #24323c; --glass-light: #ffc56b; --deck: #6b4428;
   --smoke: rgba(255, 255, 255, 0.75); --shade: rgba(9, 22, 32, 0.62);
   color-scheme: light;
 }
 /* ---------- boje: ljeto ---------- */
 :root[data-season='summer'] {
-  --bg: #fbf7ee; --bg-alt: #f2ead8; --card: #fffdf8; --ink: #1d2717; --muted: #626d56; --line: rgba(29, 39, 23, 0.11);
-  --accent: #c76a24; --accent-ink: #9f5016; --accent-2: #3f6b2f; --on-accent: #fff;
+  --bg: #fbf8f2; --bg-alt: #f1ebe0; --card: #fffdf8; --ink: #1f1d1a; --muted: #645f57; --line: rgba(31, 29, 26, 0.1);
+  --accent: #946628; --accent-ink: #7a531f; --accent-2: #2b2926; --on-accent: #fff;
   --sky-top: #6fb2e6; --sky-bot: #fdf1d6; --sun: #ffd25e; --sun-glow: rgba(255, 210, 94, 0.45);
   --mtn-3: #a9c0a2; --mtn-2: #7f9f6c; --snow-op: 0; --summer-op: 1;
   --pine: #2b552a; --pine-far: #678b5a; --trunk: #5a3f2a;
   --ground: #93c25c; --ground-2: #7aaf48; --path: #d9c49a;
-  --wood: #9a6740; --wood-dark: #7a4f2f; --roof: #3b2c22; --glass: #2b3a33; --glass-light: #ffe2a6; --deck: #7a4f2f;
+  --wood: #9a6740; --wood-dark: #7a4f2f; --roof: #2f3236; --glass: #2b3a33; --glass-light: #ffe2a6; --deck: #7a4f2f;
   --smoke: rgba(255, 255, 255, 0.45); --shade: rgba(22, 30, 14, 0.55);
 }
 
@@ -92,6 +93,14 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .rail-post { fill: var(--wood-dark); }
 .lantern rect { fill: #ffd27a; } .lantern-glow { fill: #ffd27a; opacity: 0.25; animation: glow 3s ease-in-out infinite; }
 .cabin-shadow { fill: rgba(0, 0, 0, 0.12); }
+.h-wall { fill: #f6f4ef; } .h-side { fill: #dcd8d0; } .h-base { fill: #b9b4aa; }
+.h-frame { fill: none; stroke: #f6f4ef; stroke-width: 4; } .h-bar { stroke: #f6f4ef; stroke-width: 3; }
+.h-fascia { fill: none; stroke: var(--roof); stroke-width: 22; stroke-linejoin: miter; }
+.h-fascia-snow { fill: none; stroke: #fff; stroke-width: 8; stroke-linejoin: miter; opacity: var(--snow-op); }
+.solar { fill: #1d2a3d; stroke: #5b6f8a; stroke-width: 1.5; }
+.h-step { fill: #c9c4ba; stroke: #b1ab9f; stroke-width: 2; } .h-rail { stroke: #2a2a2a; stroke-width: 4; fill: none; stroke-linecap: round; }
+.h-knob { fill: #d9b46a; }
+.led-glow { animation: glow 5s ease-in-out infinite; }
 .mug rect { fill: #c9573a; } .mug-handle { stroke: #c9573a; stroke-width: 10; fill: none; } .steam { stroke: #fff; stroke-width: 5; fill: none; stroke-linecap: round; opacity: 0.7; animation: steam 3s ease-in-out infinite; }
 .fire { animation: flicker 0.9s ease-in-out infinite alternate; transform-origin: 570px 478px; }
 .fireglow { animation: glow 2s ease-in-out infinite; }
@@ -797,3 +806,5 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .ribbon { opacity: 1; }
 }
 .room-beds .nw { white-space: nowrap; }
+/* kuća na uskom ekranu: manja i u sredini, da stane cijela */
+@media (max-width: 700px) { .scene-ext .house { transform: translate(815px, 675px) scale(0.58); } }

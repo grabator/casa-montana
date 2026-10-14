@@ -26,19 +26,22 @@ window.VIKENDICA = {
   /* demo: true = napomena u footeru i stranica sakrivena od Googlea (za objavu: false i obrisati noindex u index.html) */
   demo: true,
   demoNote: {
-    bs: 'Pregled stranice u izradi. Prave fotografije i kontakt podaci uskoro.',
-    en: 'Website preview in progress. Real photos and contact details coming soon.',
-    de: 'Vorschau der Website in Arbeit. Echte Fotos und Kontaktdaten folgen in Kürze.'
+    bs: 'Pregled stranice u izradi. Otvaramo 20.10.2026. Prave fotografije i kontakt podaci uskoro.',
+    en: 'Website preview in progress. Opening 20 October 2026. Real photos and contact details coming soon.',
+    de: 'Vorschau der Website in Arbeit. Eröffnung am 20.10.2026. Echte Fotos und Kontaktdaten folgen in Kürze.'
   },
   credit: null,
   /* prava slika za prvi ekran (npr. 'assets/img/kuca.webp'); null = ilustracija. Video: heroVideo, heroVideoWebm, heroPoster */
   heroImage: null,
+  /* crtež kuće na prvom ekranu: 'house' = kuća sa strmim krovom kao prava Casa Montana, inače A-frame vikendica */
+  houseStyle: 'house',
   /* istaknuto na prvom ekranu */
   heroChips: [
     { icon: 'fire', label: { bs: 'Kamin', en: 'Fireplace', de: 'Kamin' } },
     { icon: 'guests', label: { bs: 'Do 14 osoba', en: 'Up to 14 guests', de: 'Bis zu 14 Personen' } },
-    { icon: 'ski', label: { bs: 'Babanovac', en: 'Babanovac', de: 'Babanovac' } }
+    { icon: 'calendar', label: { bs: 'Otvaramo 20.10.', en: 'Opening 20 Oct', de: 'Eröffnung 20.10.' } }
   ],
+  /* otvaranje (sa Instagrama): poslije 20.10.2026 ovaj red na prvom ekranu treba zamijeniti, npr. sa 'Centar Babanovca' */
 
   /* --- kontakt: PRIVREMENO osim Instagrama (vlasnici šalju broj telefona i email) --- */
   contact: {
@@ -53,16 +56,17 @@ window.VIKENDICA = {
     { icon: 'bed', value: '2', label: { bs: 'apartmana', en: 'apartments', de: 'Ferienwohnungen' } },
     { icon: 'guests', value: '14', label: { bs: 'osoba u cijeloj kući', en: 'guests in the whole house', de: 'Personen im ganzen Haus' } },
     { icon: 'fire', label: { bs: 'kamin', en: 'fireplace', de: 'Kamin' } },
-    { icon: 'parking', label: { bs: 'parking', en: 'parking', de: 'Parkplatz' } }
+    { icon: 'pin', label: { bs: 'centar Babanovca', en: 'centre of Babanovac', de: 'Zentrum von Babanovac' } }
   ],
 
   /* --- galerija: ilustracije dok ne stignu prave slike ({ image: 'assets/img/x.webp', label: {...} }) --- */
   gallery: [
     { scene: 'exterior', label: { bs: 'Casa Montana', en: 'Casa Montana', de: 'Casa Montana' } },
-    { scene: 'living', label: { bs: 'Dnevni boravak sa kaminom', en: 'Living room with fireplace', de: 'Wohnzimmer mit Kamin' } },
+    { scene: 'lounge', label: { bs: 'Dnevna soba', en: 'Living room', de: 'Wohnzimmer' } },
+    { scene: 'living', label: { bs: 'Večer uz kamin', en: 'An evening by the fire', de: 'Abend am Kamin' } },
     { scene: 'bedroom', label: { bs: 'Spavaća soba', en: 'Bedroom', de: 'Schlafzimmer' } },
     { scene: 'kitchen', label: { bs: 'Kuhinja', en: 'Kitchen', de: 'Küche' } },
-    { scene: 'bathroom', label: { bs: 'Kupatilo', en: 'Bathroom', de: 'Badezimmer' } },
+    { scene: 'bathModern', label: { bs: 'Kupatilo', en: 'Bathroom', de: 'Badezimmer' } },
     { scene: 'view', label: { bs: 'Pogled na planinu', en: 'Mountain view', de: 'Blick auf die Berge' } }
   ],
 
@@ -70,10 +74,10 @@ window.VIKENDICA = {
      Slike stižu za 5-6 dana; do tada ilustracije. Raspored kreveta dodati kad ga pošalju. --- */
   rooms: [
     {
-      scene: 'bedroom', guests: 4,
+      scene: 'lounge', guests: 4,
       title: { bs: 'Apartman 1', en: 'Apartment 1', de: 'Ferienwohnung 1' },
       beds: { bs: 'Za par ili manju porodicu', en: 'For a couple or a small family', de: 'Für Paare oder kleine Familien' },
-      text: { bs: 'Topao i miran apartman za vikend u dvoje ili porodični odmor na planini.', en: 'A warm, quiet apartment for a weekend for two or a family break in the mountains.', de: 'Eine warme, ruhige Wohnung für ein Wochenende zu zweit oder einen Familienurlaub in den Bergen.' }
+      text: { bs: 'Dnevna soba, kuhinja, spavaća soba i moderno kupatilo. Topao i miran apartman za vikend u dvoje ili porodični odmor.', en: 'Living room, kitchen, bedroom and a modern bathroom. A warm, quiet apartment for a weekend for two or a family break.', de: 'Wohnzimmer, Küche, Schlafzimmer und ein modernes Bad. Eine warme, ruhige Wohnung für ein Wochenende zu zweit oder einen Familienurlaub.' }
     },
     {
       scene: 'living', guests: 10,
@@ -93,30 +97,33 @@ window.VIKENDICA = {
   /* --- o smještaju --- */
   about: {
     bs: [
-      'Casa Montana su planinski apartmani na Vlašiću, na Babanovcu. Mjesto za one koji traže kamin, mir i pogled na planinu, daleko od gužve, a opet blizu staza i šetnica.',
-      'Zimi se dan završava uz vatru u kaminu poslije skijanja, a ljeti uz zalazak sunca i svjež planinski zrak.',
-      'Možete rezervisati jedan apartman ili cijelu vikendicu za do 14 osoba. Upit šaljete direktno nama, na Viber ili WhatsApp, bez posrednika i provizije.'
+      'Vlašić nije samo mjesto na koje dođete. To je mjesto gdje usporite. Casa Montana su planinski apartmani u samom centru Babanovca, napravljeni upravo za trenutke kada želite samo da se opustite.',
+      'Jutarnja kafa bez žurbe, toplina kamina nakon dana provedenog u prirodi, pogled, tišina i osjećaj da ste pobjegli od svakodnevice. Svaki detalj smo birali s posebnom pažnjom, od materijala i rasvjete do prve jutarnje kafe.',
+      'Možete rezervisati jedan apartman ili cijelu vikendicu za do 14 osoba. Upit šaljete direktno nama, na Viber ili WhatsApp, bez posrednika i provizije. Vi samo dođite, za ostalo smo se pobrinuli.'
     ],
     en: [
-      'Casa Montana offers mountain apartments on Vlašić, in Babanovac. A place for anyone looking for a fireplace, peace and quiet and a view of the mountains, away from the crowds yet close to the slopes and trails.',
-      'In winter the day ends by the fire after skiing; in summer, with the sunset and fresh mountain air.',
-      'You can book a single apartment or the whole house for up to 14 guests. Send your enquiry straight to us on Viber or WhatsApp, with no middleman and no commission.'
+      'Vlašić is not just a place you visit. It is a place where you slow down. Casa Montana offers mountain apartments right in the centre of Babanovac, made for the moments when all you want is to relax.',
+      'An unhurried morning coffee, the warmth of the fireplace after a day outdoors, the view, the quiet and the feeling of leaving everyday life behind. We chose every detail with care, from materials and lighting to your first morning coffee.',
+      'You can book a single apartment or the whole house for up to 14 guests. Send your enquiry straight to us on Viber or WhatsApp, with no middleman and no commission. Just come, we have taken care of the rest.'
     ],
     de: [
-      'Casa Montana bietet Berg-Ferienwohnungen auf dem Vlašić, in Babanovac. Ein Ort für alle, die Kamin, Ruhe und Blick auf die Berge suchen, abseits vom Trubel und doch nah an Pisten und Wanderwegen.',
-      'Im Winter endet der Tag nach dem Skifahren am Kaminfeuer, im Sommer mit dem Sonnenuntergang und frischer Bergluft.',
-      'Sie können eine einzelne Wohnung oder das ganze Haus für bis zu 14 Personen buchen. Ihre Anfrage geht direkt an uns, per Viber oder WhatsApp, ohne Vermittler und ohne Provision.'
+      'Der Vlašić ist nicht einfach ein Ort, den man besucht. Hier kommt man zur Ruhe. Casa Montana bietet Berg-Ferienwohnungen mitten im Zentrum von Babanovac, gemacht für Momente, in denen Sie einfach entspannen möchten.',
+      'Ein Morgenkaffee ohne Eile, die Wärme des Kamins nach einem Tag in der Natur, der Ausblick, die Stille und das Gefühl, dem Alltag entkommen zu sein. Jedes Detail haben wir mit Sorgfalt gewählt, von Materialien und Licht bis zum ersten Morgenkaffee.',
+      'Sie können eine einzelne Wohnung oder das ganze Haus für bis zu 14 Personen buchen. Ihre Anfrage geht direkt an uns, per Viber oder WhatsApp, ohne Vermittler und ohne Provision. Kommen Sie einfach, um den Rest haben wir uns gekümmert.'
     ]
   },
 
-  /* --- sadržaji: kamin i parking potvrđeni, ostalo PROVJERITI sa vlasnicima --- */
+  /* --- sadržaji: kamin, kafe aparati, podno grijanje, toplotna pumpa i kupatilo potvrđeni (Instagram);
+     Wi-Fi, parking, kuhinja, posteljina i TV PROVJERITI sa vlasnicima --- */
   amenities: [
     { icon: 'fire', label: { bs: 'Kamin', en: 'Fireplace', de: 'Kamin' } },
-    { icon: 'wifi', label: { bs: 'Wi-Fi', en: 'Wi-Fi', de: 'WLAN' } },
-    { icon: 'parking', label: { bs: 'Parking', en: 'Parking', de: 'Parkplatz' } },
+    { icon: 'coffee', label: { bs: 'Espresso aparati', en: 'Espresso machines', de: 'Espressomaschinen' } },
+    { icon: 'heat', label: { bs: 'Podno grijanje i toplotna pumpa', en: 'Underfloor heating and heat pump', de: 'Fußbodenheizung und Wärmepumpe' } },
+    { icon: 'bath', label: { bs: 'Moderno kupatilo sa tušem', en: 'Modern bathroom with shower', de: 'Modernes Bad mit Dusche' } },
     { icon: 'kitchen', label: { bs: 'Opremljena kuhinja', en: 'Equipped kitchen', de: 'Ausgestattete Küche' } },
+    { icon: 'parking', label: { bs: 'Parking', en: 'Parking', de: 'Parkplatz' } },
+    { icon: 'wifi', label: { bs: 'Wi-Fi', en: 'Wi-Fi', de: 'WLAN' } },
     { icon: 'linen', label: { bs: 'Posteljina i peškiri', en: 'Bed linen and towels', de: 'Bettwäsche und Handtücher' } },
-    { icon: 'heat', label: { bs: 'Grijanje', en: 'Heating', de: 'Heizung' } },
     { icon: 'tv', label: { bs: 'TV', en: 'TV', de: 'TV' } }
   ],
 
@@ -141,13 +148,13 @@ window.VIKENDICA = {
 
   /* --- lokacija: Babanovac (tačan Google Maps pin vlasnici šalju naknadno) --- */
   distances: [
-    { icon: 'ski', place: { bs: 'Ski staze Babanovac', en: 'Babanovac ski slopes', de: 'Skipisten Babanovac' }, time: { bs: 'u blizini', en: 'nearby', de: 'in der Nähe' } },
+    { icon: 'ski', place: { bs: 'Ski staze Babanovac', en: 'Babanovac ski slopes', de: 'Skipisten Babanovac' }, time: { bs: 'centar Babanovca', en: 'centre of Babanovac', de: 'Zentrum von Babanovac' } },
     { icon: 'car', place: { bs: 'Travnik', en: 'Travnik', de: 'Travnik' }, time: { bs: '35 min', en: '35 min', de: '35 Min.' } },
     { icon: 'car', place: { bs: 'Sarajevo', en: 'Sarajevo', de: 'Sarajevo' }, time: { bs: '2 h', en: '2 h', de: '2 Std.' } },
     { icon: 'car', place: { bs: 'Banja Luka', en: 'Banja Luka', de: 'Banja Luka' }, time: { bs: '2 h', en: '2 h', de: '2 Std.' } }
   ],
   mapQuery: 'Babanovac, Vlašić',
-  locationLead: { bs: 'Na Babanovcu, Vlašić, planina iznad Travnika.', en: 'In Babanovac on Vlašić, the mountain above Travnik.', de: 'In Babanovac auf dem Vlašić, dem Berg oberhalb von Travnik.' },
+  locationLead: { bs: 'U samom centru Babanovca, na Vlašiću, planini iznad Travnika.', en: 'Right in the centre of Babanovac on Vlašić, the mountain above Travnik.', de: 'Mitten im Zentrum von Babanovac auf dem Vlašić, dem Berg oberhalb von Travnik.' },
 
   /* --- šta raditi --- */
   activities: {
