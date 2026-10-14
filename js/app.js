@@ -618,7 +618,7 @@
     document.getElementById('foot').innerHTML = footer();
     document.getElementById('dock').innerHTML = dock();
     var tt = document.getElementById('to-top-wrap');
-    if (!tt) { tt = document.createElement('div'); tt.id = 'to-top-wrap'; document.body.appendChild(tt); }
+    if (!tt) { tt = document.createElement('aside'); tt.id = 'to-top-wrap'; tt.setAttribute('aria-label', t('toTop') || 'Na vrh'); document.body.appendChild(tt); }
     tt.innerHTML = toTop();
     Guide.build();
     bindCalc();
@@ -1014,7 +1014,8 @@
     var cv = null, cx = null, parts = [], raf = 0, w = 0, h = 0, dpr = 1, visible = true;
     function size() {
       if (!cv) return;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      /* pahulje i listići su sitni: dovoljna je obična rezolucija, mnogo manje posla za slabije mobitele */
+      dpr = 1;
       w = cv.clientWidth; h = cv.clientHeight;
       cv.width = w * dpr; cv.height = h * dpr;
       cx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -1031,19 +1032,20 @@
       };
     }
     function tick() {
+      /* kad prvi ekran nije vidljiv, petlja potpuno staje (pokrene se opet kad se vrati) */
+      if (!visible) { raf = 0; return; }
       raf = requestAnimationFrame(tick);
-      if (!visible) return;
       cx.clearRect(0, 0, w, h);
       var winter = season === 'winter';
+      if (winter) { cx.globalAlpha = 0.85; cx.fillStyle = '#fff'; cx.beginPath(); }
       parts.forEach(function (p) {
         p.ph += 0.01;
         p.y += p.vy; p.x += p.vx + Math.sin(p.ph) * (winter ? 0.3 : 0.6);
         p.rot += 0.01;
         if (p.y > h + 20 || p.x > w + 30 || p.x < -30) Object.assign(p, make(false));
         if (winter) {
-          cx.globalAlpha = 0.85;
-          cx.fillStyle = '#fff';
-          cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 6.283); cx.fill();
+          /* sve pahulje u jednom potezu (jedan fill umjesto stotinu) */
+          cx.moveTo(p.x + p.r, p.y); cx.arc(p.x, p.y, p.r, 0, 6.283);
         } else {
           cx.save(); cx.translate(p.x, p.y); cx.rotate(p.rot + Math.sin(p.ph) * 0.6);
           cx.globalAlpha = 0.8; cx.fillStyle = p.hue;
@@ -1051,6 +1053,7 @@
           cx.restore();
         }
       });
+      if (winter) cx.fill();
     }
     function start(canvas) {
       cancelAnimationFrame(raf);
@@ -1059,7 +1062,11 @@
       size();
       var count = season === 'winter' ? Math.round(Math.min(110, w / 7)) : Math.round(Math.min(28, w / 40));
       parts = []; for (var i = 0; i < count; i++) parts.push(make(true));
-      if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(cv);
+      visible = true;
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (e) {
+        visible = e[0].isIntersecting;
+        if (visible && !raf) tick();
+      }).observe(cv);
       tick();
     }
     window.addEventListener('resize', function () { size(); });
