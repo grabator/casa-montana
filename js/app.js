@@ -292,9 +292,8 @@
       ? '<div class="calc-out" aria-live="polite"><p class="calc-line" id="calc-line">' + esc(t('calcHint')) + '</p>' +
         '<p class="calc-total"><span>' + esc(t('total')) + '</span><b><span id="calc-total">0</span> ' + esc(P.currency) + '</b></p>' +
         '<p class="calc-dep" id="calc-dep"></p></div>'
-      : '<div class="calc-out" aria-live="polite"><p class="calc-line" id="calc-line">' + esc(t('calcHint')) + '</p>' +
-        '<p class="calc-total calc-onreq"><span>' + esc(t('priceLabel')) + '</span><b>' + esc(t('onRequest')) + '</b></p>' +
-        '<p class="calc-dep">' + esc(t('onRequestNote')) + '</p></div>';
+      : '<div class="calc-out calc-out-req" aria-live="polite"><p class="calc-line" id="calc-line">' + esc(t('calcHint')) + '</p>' +
+        '<p class="calc-req"><span>' + esc(t('priceLabel')) + ': <b>' + esc(t('onRequest')) + '</b></span> ' + esc(t('onRequestNote')) + '</p></div>';
     var body = '<div class="calc-grid">' +
       '<form class="calc-card reveal" id="calc-form" novalidate>' +
       '<div class="field field-dates"><span>' + esc(t('dates')) + ' <i class="req" aria-hidden="true">*</i></span>' +
@@ -303,21 +302,22 @@
       '<button type="button" class="date-btn" data-cal="d" aria-haspopup="dialog" aria-expanded="false">' + ic('calendar') + '<span><small>' + esc(t('departure')) + '</small><b id="lbl-d">' + esc(dateLabel(form.d)) + '</b></span></button>' +
       '</div><input type="hidden" id="f-a" value="' + esc(form.a) + '"><input type="hidden" id="f-d" value="' + esc(form.d) + '">' +
       '<div class="pop cal-pop" id="cal" role="dialog" aria-label="' + esc(t('dates')) + '" hidden></div></div>' +
-      dropdown('dd-g', t('guests'), guestOpts(), form.g) +
-      roomSel + out +
+      '<div class="calc-row">' + dropdown('dd-g', t('guests'), guestOpts(), form.g) + roomSel + '</div>' + out +
       '</form>' +
       '<form class="inq-card reveal" id="inq-form" novalidate><h3>' + esc(t('inquiryTitle')) + '</h3><p class="muted">' + esc(t('inquiryLead')) + '</p>' +
-      '<label class="field"><span>' + esc(t('name')) + ' <i class="req" aria-hidden="true">*</i></span><input type="text" id="f-n" autocomplete="name" required value="' + esc(form.name) + '"></label>' +
-      '<label class="field"><span>' + esc(t('phone')) + ' <i class="req" aria-hidden="true">*</i></span><input type="tel" id="f-p" autocomplete="tel" inputmode="tel" required value="' + esc(form.phone) + '"></label>' +
-      '<label class="field"><span>' + esc(t('message')) + '</span><textarea id="f-m" rows="2">' + esc(form.msg) + '</textarea></label>' +
+      '<div class="calc-row"><label class="field"><span>' + esc(t('name')) + ' <i class="req" aria-hidden="true">*</i></span><input type="text" id="f-n" autocomplete="name" required value="' + esc(form.name) + '"></label>' +
+      '<label class="field"><span>' + esc(t('phone')) + ' <i class="req" aria-hidden="true">*</i></span><input type="tel" id="f-p" autocomplete="tel" inputmode="tel" required value="' + esc(form.phone) + '"></label></div>' +
+      /* poruka nije obavezna: sakrivena dok gost ne klikne */
+      '<details class="msg-more"' + (form.msg ? ' open' : '') + '><summary>' + ic('plus') + esc(t('addMessage')) + '</summary>' +
+      '<label class="field"><span class="sr-only">' + esc(t('message')) + '</span><textarea id="f-m" rows="2" placeholder="' + esc(t('message')) + '">' + esc(form.msg) + '</textarea></label></details>' +
       '<div class="need" id="need"><p>' + esc(t('needTitle')) + '</p><ul>' +
       '<li data-need="dates">' + ic('check') + esc(t('needDatesItem')) + '</li>' +
       '<li data-need="name">' + ic('check') + esc(t('needNameItem')) + '</li>' +
       '<li data-need="phone">' + ic('check') + esc(t('needPhoneItem')) + '</li></ul>' +
       '<p class="need-why">' + esc(t('needWhy')) + '</p></div>' +
       '<p class="form-err" id="inq-err" role="alert"></p>' +
-      '<div class="inq-btns"><a class="btn btn-viber" id="send-viber" href="#">' + ic('viber') + esc(t('sendViber')) + '</a>' +
-      '<a class="btn btn-wa" id="send-wa" href="#" target="_blank" rel="noopener">' + ic('whatsapp') + esc(t('sendWhatsapp')) + '</a></div>' +
+      '<div class="inq-btns"><a class="btn btn-viber" id="send-viber" href="#">' + ic('viber') + '<span class="lbl-long">' + esc(t('sendViber')) + '</span><span class="lbl-short">' + esc(t('viber')) + '</span></a>' +
+      '<a class="btn btn-wa" id="send-wa" href="#" target="_blank" rel="noopener">' + ic('whatsapp') + '<span class="lbl-long">' + esc(t('sendWhatsapp')) + '</span><span class="lbl-short">' + esc(t('whatsapp')) + '</span></a></div>' +
       '<p class="muted small">' + esc(t('inquiryNote')) + '</p></form></div>';
     return section('calc', null, t(P ? 'calcTitle' : 'datesTitle'), t(P ? 'calcLead' : 'datesLead'), body, 'sec-alt');
   }

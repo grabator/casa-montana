@@ -895,3 +895,36 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .hero-chips { margin-top: -6px; }
   .hero-ctas { margin-top: auto; }
 }
+
+/* ===== upit: kraće i preglednije ===== */
+.calc-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 10px; }
+.calc-row > .field { min-width: 0; }
+.calc-out-req { padding: 12px 14px; }
+.calc-req { margin-top: 4px; font-size: 0.8125rem; color: var(--muted); line-height: 1.4; }
+.calc-req span { color: var(--ink); font-weight: 700; }
+.calc-req b { font-family: 'Fraunces', serif; color: var(--accent-ink); font-size: 1rem; }
+.msg-more { margin: -2px 0 12px; }
+.msg-more summary { display: inline-flex; align-items: center; gap: 6px; padding: 6px 2px; cursor: pointer; list-style: none; font-weight: 700; font-size: 0.875rem; color: var(--accent-ink); }
+.msg-more summary::-webkit-details-marker { display: none; }
+.msg-more summary .ic { width: 18px; height: 18px; transition: transform 0.25s; }
+.msg-more[open] summary .ic { transform: rotate(45deg); }
+.msg-more .field { margin: 6px 0 0; }
+.need { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 10px 12px; }
+.need > p:first-child { margin: 0; font-size: 0.8125rem; }
+.need ul { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.need li { font-size: 0.8125rem; gap: 6px; }
+.need li .ic { width: 16px; height: 16px; }
+.need-why { display: none; }
+.inq-btns { grid-template-columns: 1fr 1fr; }
+.inq-btns .btn { white-space: nowrap; padding: 0 12px; }
+.inq-btns .lbl-long { display: none; } .inq-btns .lbl-short { display: inline; }
+.inq-card > .muted { margin: 4px 0 12px; font-size: 0.9375rem; }
+.inq-card .field textarea { min-height: 64px; }
+@media (max-width: 380px) { .calc-row .dd-btn, .calc-row input { font-size: 0.875rem; } }
+/* mobitel: termin i upit kao jedna kartica */
+@media (max-width: 959px) {
+  .calc-grid { gap: 0; }
+  .calc-card { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: 0; padding-bottom: 14px; box-shadow: none; }
+  .inq-card { border-top-left-radius: 0; border-top-right-radius: 0; border-top: 1px dashed var(--line); padding-top: 16px; }
+  .inq-card h3 { font-size: 1.25rem; }
+}
