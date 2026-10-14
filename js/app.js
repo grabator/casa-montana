@@ -162,7 +162,7 @@
         return '<li style="--d:' + i + '">' + ic(c.icon) + esc(L(c.label)) + '</li>';
       }).join('') + '</ul>' : '') +
       '<div class="hero-ctas reveal"><a class="btn btn-primary" href="#calc">' + ic('calendar') + esc(t(P ? 'heroCta' : 'heroCtaInquiry')) + '</a>' +
-      '<a class="btn btn-ghost" href="#gallery">' + esc(t('heroSecondary')) + '</a></div>' +
+      '<a class="btn btn-ghost" href="#gallery"><span class="lbl-long">' + esc(t('heroSecondary')) + '</span><span class="lbl-short">' + esc(t('galleryTitle')) + '</span></a></div>' +
       '</div>' +
       '<a class="scroll-cue" href="#main" aria-label="' + esc(t('scrollMore')) + '"><span>' + esc(t('scrollMore')) + '</span>' + ic('down') + '</a>';
   }
@@ -342,7 +342,7 @@
       (R.tip ? '<p class="dirs-tip">' + ic('snow') + '<span>' + esc(L(R.tip)) + '</span></p>' : '') + '</div>';
   }
   function mapSvg() {
-    return '<svg viewBox="0 0 600 420" class="map-svg" aria-hidden="true">' +
+    return '<svg viewBox="0 0 600 420" preserveAspectRatio="xMidYMid slice" class="map-svg" aria-hidden="true">' +
       '<rect width="600" height="420" class="map-bg"/>' +
       '<path class="map-hill" d="M0 300 Q120 200 240 260 T480 220 T600 250 V420 H0Z"/>' +
       '<path class="map-hill-2" d="M0 360 Q150 300 300 340 T600 320 V420 H0Z"/>' +

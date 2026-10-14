@@ -148,7 +148,7 @@ window.VIKENDICA = {
 
   /* --- lokacija: Babanovac (tačan Google Maps pin vlasnici šalju naknadno) --- */
   distances: [
-    { icon: 'ski', place: { bs: 'Ski staze Babanovac', en: 'Babanovac ski slopes', de: 'Skipisten Babanovac' }, time: { bs: 'centar Babanovca', en: 'centre of Babanovac', de: 'Zentrum von Babanovac' } },
+    { icon: 'ski', place: { bs: 'Ski staze Babanovac', en: 'Babanovac ski slopes', de: 'Skipisten Babanovac' }, time: { bs: 'u blizini', en: 'nearby', de: 'in der Nähe' } },
     { icon: 'car', place: { bs: 'Travnik', en: 'Travnik', de: 'Travnik' }, time: { bs: '35 min', en: '35 min', de: '35 Min.' } },
     { icon: 'car', place: { bs: 'Sarajevo', en: 'Sarajevo', de: 'Sarajevo' }, time: { bs: '2 h', en: '2 h', de: '2 Std.' } },
     { icon: 'car', place: { bs: 'Banja Luka', en: 'Banja Luka', de: 'Banja Luka' }, time: { bs: '2 h', en: '2 h', de: '2 Std.' } }
