@@ -22,7 +22,7 @@ window.VIKENDICA = {
   languages: ['bs', 'en', 'de'],
   badge: { bs: 'Babanovac', en: 'Babanovac', de: 'Babanovac' },
   /* početna sezona: 'auto' (po mjesecu), 'winter' ili 'summer' */
-  defaultSeason: 'auto',
+  defaultSeason: 'winter',
   /* demo: true = napomena u footeru i stranica sakrivena od Googlea (za objavu: false i obrisati noindex u index.html) */
   demo: true,
   demoNote: {

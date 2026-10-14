@@ -49,7 +49,7 @@
   (function () {
     try {
       var s = localStorage.getItem('planinka-season');
-      if (!s) { var m = new Date().getMonth() + 1; s = [11, 12, 1, 2, 3, 4].indexOf(m) !== -1 ? 'winter' : 'summer'; }
+      if (!s) s = 'winter'; /* zadano zima (defaultSeason u data/vikendica.js) */
       document.documentElement.setAttribute('data-season', s);
     } catch (e) {}
   })();

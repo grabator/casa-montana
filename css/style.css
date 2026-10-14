@@ -932,39 +932,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .eyebrow::before, .sec-head.in .eyebrow::before, .guide .eyebrow::before { display: none; }
 .eyebrow { gap: 0; }
 
-/* ===== ukrasi sa strane (široki ekrani) i ćilim motiv ===== */
-.deco { display: none; }
-@media (min-width: 1360px) {
-  .deco { display: block; position: fixed; inset: 0; z-index: 4; pointer-events: none; opacity: 0; transition: opacity 0.9s ease; color: var(--accent); }
-  .deco.on { opacity: 1; }
-  .deco-side { position: absolute; top: 0; bottom: 0; width: calc((100vw - 1180px) / 2 - 20px); overflow: hidden; }
-  .deco-l { left: 0; } .deco-r { right: 0; }
-  /* ćilim traka uz samu ivicu ekrana, blijeda i izblijedi gore i dolje */
-  .dc-kilim { position: absolute; top: 0; bottom: 0; width: 36px; height: 100%; opacity: 0.16; -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent); mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent); }
-  .deco-l .dc-kilim { left: 14px; } .deco-r .dc-kilim { right: 14px; }
-  .deco-art { display: none; }
-  .deco-snow { display: none; }
-}
-@media (min-width: 1560px) {
-  .deco-art { display: block; position: absolute; inset: 0 0 0 0; }
-  .deco-l .deco-art { left: 64px; } .deco-r .deco-art { right: 64px; }
-  .deco-art svg { position: absolute; left: 0; width: 100%; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-  .dc-far { top: 90px; height: 40vh; }
-  .dc-near { bottom: 12px; height: 34vh; }
-  .dc-far { opacity: 0.22; transform: translateY(var(--far, 0)); }
-  .dc-near { opacity: 0.38; transform: translateY(var(--near, 0)); }
-  .deco-r .dc-far { transform: scaleX(-1) translateY(var(--far, 0)) !important; }
-  .deco-r .dc-near { transform: scaleX(-1) translateY(var(--near, 0)) !important; }
-  .dc-faint { opacity: 0.4; stroke-dasharray: 3 6; }
-  .dc-cap { opacity: 0; transition: opacity 1s; }
-  [data-season='winter'] .dc-cap { opacity: 1; }
-  .deco-art svg, .dc-cap { will-change: transform; }
-  /* snijeg samo zimi, sitne pahulje koje polako padaju */
-  [data-season='winter'] .deco-snow { display: block; position: absolute; inset: -100% 0 0; background-image: radial-gradient(2px 2px at 30px 40px, var(--accent) 50%, transparent 51%), radial-gradient(1.5px 1.5px at 120px 160px, var(--accent) 50%, transparent 51%), radial-gradient(2.5px 2.5px at 210px 90px, var(--accent) 50%, transparent 51%), radial-gradient(1.5px 1.5px at 70px 230px, var(--accent) 50%, transparent 51%); background-size: 260px 260px; opacity: 0.35; animation: deco-snow 26s linear infinite; }
-}
-@keyframes deco-snow { to { transform: translateY(50%); } }
-@media (prefers-reduced-motion: reduce) { .deco-snow { animation: none !important; } }
-
 /* mali ćilim ukras uz male naslove sekcija (vidi se i na mobitelu) */
 .sec-head .eyebrow::before, .sec-head.in .eyebrow::before { display: inline-block; content: ''; width: 30px; height: 10px; margin-right: 10px; flex: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 10'%3E%3Cpath d='M5 0l5 5-5 5-5-5z' fill='%23c4372b'/%3E%3Cpath d='M15 1l4 4-4 4-4-4z' fill='%232d4f8f'/%3E%3Cpath d='M25 0l5 5-5 5-5-5z' fill='%23e8a628'/%3E%3C/svg%3E") no-repeat center / contain; border-radius: 0; transition: none; }
 
@@ -981,3 +948,12 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .topbar::after { height: 3px; transform: none; clip-path: inset(0 calc(100% - var(--progress, 0) * 100%) 0 0); background: repeating-linear-gradient(90deg, #c4372b 0 16px, #e8a628 16px 22px, #2d4f8f 22px 38px, #e8a628 38px 44px, #3d7d4a 44px 60px, #e8a628 60px 66px); }
 /* 5. footer: jedva vidljiv ćilim uzorak u pozadini */
 .foot { background-image: linear-gradient(rgba(43, 41, 38, 0.94), rgba(43, 41, 38, 0.94)), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M24 4 L44 24 L24 44 L4 24Z' fill='none' stroke='%23c4372b' stroke-width='2'/%3E%3Cpath d='M24 14 L34 24 L24 34 L14 24Z' fill='%232d4f8f'/%3E%3Cpath d='M24 20 L28 24 L24 28 L20 24Z' fill='%23e8a628'/%3E%3Cpath d='M0 0 L6 6 M48 0 L42 6 M0 48 L6 42 M48 48 L42 42' stroke='%233d7d4a' stroke-width='2'/%3E%3C/svg%3E"); background-size: auto, 48px 48px; }
+
+/* jelke koje stoje na valovitoj liniji (grebenu) između sekcija: listaju se sa stranicom, ne preklapaju sadržaj */
+.sec-alt::after, .sec-alt + .sec:not(.sec-alt)::after { content: ''; position: absolute; left: 0; right: 0; top: -88px; height: 72px; pointer-events: none; z-index: 1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' fill='none' stroke='%23946628' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16.0 30.0 L9.5 48.2 L12.8 48.2 L7.5 63.6 L11.6 63.6 L5.9 75.1 L26.1 75.1 L20.4 63.6 L24.5 63.6 L19.2 48.2 L22.5 48.2 Z M16 75.1 V78'/%3E%3Cpath d='M38.0 12.0 L29.1 37.1 L33.6 37.1 L26.4 58.2 L31.9 58.2 L24.1 74.0 L51.9 74.0 L44.1 58.2 L49.6 58.2 L42.4 37.1 L46.9 37.1 Z M38 74.0 V78'/%3E%3Cpath d='M60.0 38.0 L54.6 53.2 L57.3 53.2 L52.9 66.0 L56.3 66.0 L51.6 75.6 L68.4 75.6 L63.7 66.0 L67.1 66.0 L62.7 53.2 L65.4 53.2 Z M60 75.6 V78'/%3E%3C/svg%3E") no-repeat 7% 100% / auto 100%, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 80' fill='none' stroke='%23946628' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.0 40.0 L8.9 54.4 L11.4 54.4 L7.3 66.6 L10.5 66.6 L6.0 75.7 L22.0 75.7 L17.5 66.6 L20.7 66.6 L16.6 54.4 L19.1 54.4 Z M14 75.7 V78'/%3E%3Cpath d='M34.0 20.0 L26.2 42.0 L30.1 42.0 L23.8 60.6 L28.6 60.6 L21.8 74.5 L46.2 74.5 L39.4 60.6 L44.2 60.6 L37.9 42.0 L41.8 42.0 Z M34 74.5 V78'/%3E%3Cpath d='M56.0 6.0 L46.3 33.4 L51.2 33.4 L43.3 56.4 L49.3 56.4 L40.9 73.7 L71.1 73.7 L62.7 56.4 L68.7 56.4 L60.8 33.4 L65.7 33.4 Z M56 73.7 V78'/%3E%3Cpath d='M78.0 34.0 L72.1 50.7 L75.0 50.7 L70.2 64.8 L73.9 64.8 L68.8 75.4 L87.2 75.4 L82.1 64.8 L85.8 64.8 L81.0 50.7 L83.9 50.7 Z M78 75.4 V78'/%3E%3C/svg%3E") no-repeat 91% 100% / auto 100%; opacity: 0.55; }
+.sec-alt + .sec-alt::after, .ribbon + .sec-alt::after, #main > .sec:first-of-type::after { display: none; }
+@media (max-width: 700px) { .sec-alt::after, .sec-alt + .sec:not(.sec-alt)::after { top: -66px; height: 50px; background-position: 4% 100%, 96% 100%; } }
+/* sekcija iznad grebena sa jelkama dobije malo više prostora dolje, da jelke ne diraju sadržaj */
+.sec:not(.sec-alt):has(+ .sec-alt:not(.ribbon + .sec-alt)), .sec-alt:has(+ .sec:not(.sec-alt)) { padding-bottom: clamp(120px, 6vw + 64px, 170px); }
+@media (max-width: 700px) { .sec:not(.sec-alt):has(+ .sec-alt), .sec-alt:has(+ .sec:not(.sec-alt)) { padding-bottom: 104px; } }
