@@ -141,7 +141,13 @@
         '<img class="hl-word" src="' + esc(lg.word) + '" alt="" aria-hidden="true"></h1>';
     }
     /* slova se pojavljuju jedno za drugim; razmak ostaje običan da se dugo ime može prelomiti u dva reda */
-    var letters = D.name.split('').map(function (ch, i) { return ch === ' ' ? ' ' : '<span style="--i:' + i + '">' + esc(ch) + '</span>'; }).join('');
+    /* svaka riječ je u svom bloku, pa se prelama samo između riječi, nikad usred riječi */
+    var n = 0;
+    var letters = D.name.split(' ').map(function (w) {
+      var out = '<span class="h1-word">' + w.split('').map(function (ch) { return '<span style="--i:' + (n++) + '">' + esc(ch) + '</span>'; }).join('') + '</span>';
+      n++;
+      return out;
+    }).join(' ');
     return '<h1 class="hero-h1"><span class="h1-small">' + esc(L(D.kind)) + '</span><span class="sr-only">' + esc(D.name) + '</span><span class="h1-name" aria-hidden="true">' + letters + '</span><span class="h1-place">' + esc(D.place) + '</span></h1>';
   }
   function hero() {
@@ -195,7 +201,7 @@
       return '<li class="room spot reveal" style="--d:' + i + '">' +
         '<div class="room-art">' + sceneOrImage(r) + '</div>' +
         '<div class="room-body"><h3>' + esc(L(r.title)) + '</h3>' +
-        '<p class="room-beds">' + ic('bed') + esc(L(r.beds)) + (r.guests ? ' · ' + ic('guests') + esc(t('upToGuests', { n: r.guests })) : '') + '</p>' +
+        '<p class="room-beds">' + ic('bed') + esc(L(r.beds)) + (r.guests ? ' · <span class="nw">' + ic('guests') + esc(t('upToGuests', { n: r.guests })) + '</span>' : '') + '</p>' +
         (r.text ? '<p class="room-text">' + esc(L(r.text)) + '</p>' : '') +
         '<a class="btn btn-small btn-outline" href="#calc" data-room="' + i + '">' + esc(t('askRoom')) + ic('arrow') + '</a></div></li>';
     }).join('') + '</ul>';

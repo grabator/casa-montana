@@ -1,4 +1,4 @@
-# Casa Montana · Apartmani Vlašić
+# Casa Montana Vlašić Apartmani
 
 Web stranica za Casa Montana Vlašić Apartments (Instagram: [@casa.montana.vlasic](https://www.instagram.com/casa.montana.vlasic/)).
 Napravljena na osnovu šablona Planinka. Čisti HTML, CSS i JavaScript, bez frameworka, servera i baze.
@@ -8,14 +8,21 @@ Jezici: bosanski, engleski i njemački.
 
 Sve u `data/vikendica.js` označeno sa **PRIVREMENO** je okvirno i mora se zamijeniti pravim podacima prije objave.
 
-Od vlasnika treba:
-- [ ] broj apartmana, kreveti i broj osoba po apartmanu, kratak opis svakog
-- [ ] cijene po noćenju (ili ostaje "na upit")
-- [ ] sadržaji (parking, Wi-Fi, kuhinja, kamin, doručak...)
-- [ ] Google Maps link (tačna lokacija) i udaljenosti (staza, Babanovac...)
+Dobijeno od vlasnika (upisano):
+- [x] naziv: Casa Montana Vlašić Apartmani, planinski apartmani na Vlašiću
+- [x] slogan: kamin, mir i pogled na planinu
+- [x] Apartman 1 do 4 osobe, Apartman 2 do 10 osoba, cijela vikendica do 14 osoba
+- [x] lokacija okvirno: Babanovac, Vlašić
+- [x] cijene: na upit
+
+Od vlasnika još treba:
 - [ ] telefon za poziv, Viber i WhatsApp, email
-- [ ] fotografije (15.10) i video za prvi ekran (do 20.10)
-- [ ] kućni red i pitanja (check-in, check-out, ljubimci...), ako želi tu sekciju
+- [ ] Google Maps link (tačna lokacija)
+- [ ] fotografije apartmana (stižu za 5 do 6 dana) i po želji video za prvi ekran
+- [ ] raspored kreveta u svakom apartmanu (bračni, odvojeni, kauč)
+- [ ] potvrda sadržaja: Wi-Fi, kuhinja, TV, posteljina, ljubimci, roštilj... (kamin i parking su potvrđeni)
+- [ ] tačne udaljenosti (staza, centar Babanovca)
+- [ ] kućni red i pitanja (check-in, check-out, ljubimci...), ako žele tu sekciju
 
 Prije objave na pravom domenu:
 - [ ] `demo: false` u `data/vikendica.js`
