@@ -889,3 +889,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .hero-tag, .h1-place, .h1-small { text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35); }
 /* mobitel: ispod prvog ekrana viri samo čist rub kartice (znak da ima još), bez presječenog teksta */
 @media (max-width: 700px) { .facts { margin-top: -22px; } }
+/* mobitel: oznake odmah ispod slogana (uz tekst), dugmad ostaju dolje, kuća u sredini slobodna */
+@media (max-width: 959px) {
+  .hero-in { justify-content: flex-start; }
+  .hero-chips { margin-top: -6px; }
+  .hero-ctas { margin-top: auto; }
+}
