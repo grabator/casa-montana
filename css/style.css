@@ -882,3 +882,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .hero-ctas .btn { font-size: 0.875rem; }
   .hero-ctas .btn .ic { display: none; }
 }
+
+/* čitljivost na prvom ekranu: oznake i sporedno dugme na tamnom staklu, da se čitaju i preko bijele kuće */
+.hero-chips li, .hero .badge { background: rgba(24, 21, 18, 0.46); border-color: rgba(255, 255, 255, 0.26); -webkit-backdrop-filter: blur(10px) saturate(1.2); backdrop-filter: blur(10px) saturate(1.2); text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); }
+.hero .btn-ghost { background: rgba(24, 21, 18, 0.4); border-color: rgba(255, 255, 255, 0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.hero-tag, .h1-place, .h1-small { text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35); }
