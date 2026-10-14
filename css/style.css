@@ -928,3 +928,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .inq-card { border-top-left-radius: 0; border-top-right-radius: 0; border-top: 1px dashed var(--line); padding-top: 16px; }
   .inq-card h3 { font-size: 1.25rem; }
 }
+/* bez crte ispred malih naslova (npr. "Dobrodošli") */
+.eyebrow::before, .sec-head.in .eyebrow::before, .guide .eyebrow::before { display: none; }
+.eyebrow { gap: 0; }
