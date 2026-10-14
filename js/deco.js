@@ -38,19 +38,25 @@
     return '<path d="' + d + '"/>' + caps;
   }
 
-  /* jedna strana: 300 x 1200, planine dolje, jelke na više visina, mjesec gore */
+  /* jedna strana: 300 x 1200. Svaki sloj ima svoju zonu da se linije nikad ne preklope:
+     gore mjesec, ptice i planine (do y=440), dolje jelke (od y=900). */
   function side(seed, flip) {
-    var r = rng(seed), W = 300, far = '', near = '', i;
-    far += mountains(W, 1060, 3, seed + 3, 220);
-    far += mountains(W, 640, 2, seed + 9, 150);
-    far += '<circle cx="' + (flip ? 70 : 220) + '" cy="150" r="34"/><circle cx="' + (flip ? 70 : 220) + '" cy="150" r="48" class="dc-faint"/>';
-    /* ptice */
-    far += '<path d="M' + (flip ? 180 : 90) + ' 260 q10 -8 20 0 q10 -8 20 0 M' + (flip ? 210 : 60) + ' 300 q7 -6 14 0 q7 -6 14 0"/>';
-    for (i = 0; i < 5; i++) near += pine(20 + r() * 260, 1180 - r() * 40, 90 + r() * 90);
-    for (i = 0; i < 3; i++) near += pine(30 + r() * 240, 760 - r() * 30, 60 + r() * 60);
-    near += '<path d="M0 1180 Q150 1150 300 1175"/>';
-    return '<svg class="dc-far" viewBox="0 0 300 1200" preserveAspectRatio="xMidYMax meet" aria-hidden="true"' + (flip ? ' style="transform:scaleX(-1)"' : '') + '><g>' + far + '</g></svg>' +
-      '<svg class="dc-near" viewBox="0 0 300 1200" preserveAspectRatio="xMidYMax meet" aria-hidden="true"' + (flip ? ' style="transform:scaleX(-1)"' : '') + '><g>' + near + '</g></svg>';
+    var r = rng(seed), far = '', near = '', i;
+    far += '<circle cx="' + (flip ? 70 : 220) + '" cy="120" r="30"/><circle cx="' + (flip ? 70 : 220) + '" cy="120" r="44" class="dc-faint"/>';
+    far += '<path d="M' + (flip ? 170 : 80) + ' 210 q10 -8 20 0 q10 -8 20 0 M' + (flip ? 205 : 55) + ' 245 q7 -6 14 0 q7 -6 14 0"/>';
+    far += mountains(300, 440, 2, seed + 3, 150);
+    /* jelke u jednom redu, poredane od lijeva nadesno da se ne sijeku */
+    var x = 18;
+    for (i = 0; i < 6 && x < 290; i++) {
+      var h = 90 + r() * 80, w = h * 0.42;
+      x += w / 2;
+      if (x + w / 2 > 296) break;
+      near += pine(x, 1170, h);
+      x += w / 2 + 6 + r() * 10;
+    }
+    near += '<path d="M0 1172 Q150 1150 300 1170"/>';
+    return '<svg class="dc-far" viewBox="0 60 300 400" preserveAspectRatio="xMidYMin meet" aria-hidden="true"' + (flip ? ' style="transform:scaleX(-1)"' : '') + '><g>' + far + '</g></svg>' +
+      '<svg class="dc-near" viewBox="0 960 300 230" preserveAspectRatio="xMidYMax meet" aria-hidden="true"' + (flip ? ' style="transform:scaleX(-1)"' : '') + '><g>' + near + '</g></svg>';
   }
 
   /* ćilim traka: rombovi u bojama pufa (crvena, plava, žuta, zelena) */
@@ -89,8 +95,10 @@
     var y = window.scrollY, vh = window.innerHeight;
     el.classList.toggle('on', y > vh * 0.55);
     if (reduced) return;
-    el.style.setProperty('--far', (-y * 0.04).toFixed(1) + 'px');
-    el.style.setProperty('--near', (-y * 0.1).toFixed(1) + 'px');
+    /* pomak ograničen kroz cijelu stranicu (najviše 30 i 70 px), pa slojevi ne odlutaju jedan u drugi */
+    var k = Math.min(1, y / Math.max(1, document.documentElement.scrollHeight - vh));
+    el.style.setProperty('--far', (-k * 30).toFixed(1) + 'px');
+    el.style.setProperty('--near', (-k * 50).toFixed(1) + 'px');
   }
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   window.addEventListener('resize', update);
