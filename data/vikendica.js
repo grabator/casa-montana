@@ -36,8 +36,9 @@ window.VIKENDICA = {
     { image: 'assets/img/a1-sto.webp', thumb: 'assets/img/a1-sto-800.webp', label: { bs: 'Postavljen sto', en: 'Table set for dinner', de: 'Gedeckter Tisch' } },
     { image: 'assets/img/a1-krevet.webp', thumb: 'assets/img/a1-krevet-800.webp', label: { bs: 'Bračni krevet', en: 'Double bed', de: 'Doppelbett' } }
   ],
-  /* prava slika za prvi ekran (npr. 'assets/img/kuca.webp'); null = ilustracija. Video: heroVideo, heroVideoWebm, heroPoster */
-  heroImage: null,
+  /* prava slika za prvi ekran (uspravna za mobitel) i heroImageWide za laptop; null = ilustracija. Video: heroVideo, heroVideoWebm, heroPoster */
+  heroImage: 'assets/img/kuca-sprijeda-800.webp',
+  heroImageWide: 'assets/img/hero-siroko.webp',
   /* crtež kuće na prvom ekranu: 'house' = kuća sa strmim krovom kao prava Casa Montana, inače A-frame vikendica */
   houseStyle: 'house',
   /* istaknuto na prvom ekranu */
@@ -53,6 +54,7 @@ window.VIKENDICA = {
       { id: 'ba', label: { bs: 'Broj u BiH', en: 'Bosnian number', de: 'Nummer in Bosnien' }, phone: '+387 62 429 330', viber: '+38762429330', whatsapp: '38762429330' },
       { id: 'de', label: { bs: 'Broj u Njemačkoj', en: 'German number', de: 'Nummer in Deutschland' }, phone: '+49 172 9216987', viber: '+491729216987', whatsapp: '491729216987' }
     ],
+    email: 'casamontanavlasic@gmail.com',
     instagram: 'casa.montana.vlasic'
   },
 
@@ -64,23 +66,50 @@ window.VIKENDICA = {
     { icon: 'pin', label: { bs: 'centar Babanovca', en: 'centre of Babanovac', de: 'Zentrum von Babanovac' } }
   ],
 
-  /* --- galerija: prave fotografije Apartmana 1 (1600px + manja -800 verzija); Apartman 2 dodati kad stignu slike --- */
+  /* --- galerija: prave fotografije u tri taba (group: a1, a2, out); slike 1600px + manja -800 verzija --- */
+  galleryTabs: [
+    { id: 'a1', label: { bs: 'Apartman 1', en: 'Apartment 1', de: 'Ferienwohnung 1' } },
+    { id: 'a2', label: { bs: 'Apartman 2', en: 'Apartment 2', de: 'Ferienwohnung 2' } },
+    { id: 'out', label: { bs: 'Kuća i pogled', en: 'House and view', de: 'Haus und Aussicht' } }
+  ],
   gallery: [
-    { image: 'assets/img/a1-dnevna.webp', thumb: 'assets/img/a1-dnevna-800.webp', label: { bs: 'Dnevna soba', en: 'Living room', de: 'Wohnzimmer' } },
-    { image: 'assets/img/a1-trpezarija.webp', thumb: 'assets/img/a1-trpezarija-800.webp', label: { bs: 'Trpezarija uz kamin', en: 'Dining area by the fireplace', de: 'Essbereich am Kamin' } },
-    { image: 'assets/img/a1-sofa.webp', thumb: 'assets/img/a1-sofa-800.webp', label: { bs: 'Ugaona garnitura', en: 'Corner sofa', de: 'Ecksofa' } },
-    { image: 'assets/img/a1-kamin.webp', thumb: 'assets/img/a1-kamin-800.webp', label: { bs: 'Kamin', en: 'Fireplace', de: 'Kamin' } },
-    { image: 'assets/img/a1-zid.webp', thumb: 'assets/img/a1-zid-800.webp', label: { bs: 'Detalji', en: 'Details', de: 'Details' } },
-    { image: 'assets/img/a1-spavaca.webp', thumb: 'assets/img/a1-spavaca-800.webp', label: { bs: 'Spavaća soba', en: 'Bedroom', de: 'Schlafzimmer' } },
-    { image: 'assets/img/a1-krevet.webp', thumb: 'assets/img/a1-krevet-800.webp', label: { bs: 'Bračni krevet', en: 'Double bed', de: 'Doppelbett' } },
-    { image: 'assets/img/a1-kuhinja.webp', thumb: 'assets/img/a1-kuhinja-800.webp', label: { bs: 'Kuhinja', en: 'Kitchen', de: 'Küche' } },
-    { image: 'assets/img/a1-kupatilo.webp', thumb: 'assets/img/a1-kupatilo-800.webp', label: { bs: 'Kupatilo', en: 'Bathroom', de: 'Badezimmer' } },
-    { image: 'assets/img/a1-tv.webp', thumb: 'assets/img/a1-tv-800.webp', label: { bs: 'Kutak sa TV-om', en: 'TV corner', de: 'TV-Ecke' } },
-    { image: 'assets/img/a1-sto.webp', thumb: 'assets/img/a1-sto-800.webp', label: { bs: 'Postavljen sto', en: 'Table set for dinner', de: 'Gedeckter Tisch' } }
+    { image: 'assets/img/a1-dnevna.webp', thumb: 'assets/img/a1-dnevna-800.webp', group: 'a1', label: { bs: 'Dnevna soba', en: 'Living room', de: 'Wohnzimmer' } },
+    { image: 'assets/img/a1-trpezarija.webp', thumb: 'assets/img/a1-trpezarija-800.webp', group: 'a1', label: { bs: 'Trpezarija uz kamin', en: 'Dining area by the fireplace', de: 'Essbereich am Kamin' } },
+    { image: 'assets/img/a1-sofa.webp', thumb: 'assets/img/a1-sofa-800.webp', group: 'a1', label: { bs: 'Ugaona garnitura', en: 'Corner sofa', de: 'Ecksofa' } },
+    { image: 'assets/img/a1-kamin.webp', thumb: 'assets/img/a1-kamin-800.webp', group: 'a1', label: { bs: 'Kamin', en: 'Fireplace', de: 'Kamin' } },
+    { image: 'assets/img/a1-zid.webp', thumb: 'assets/img/a1-zid-800.webp', group: 'a1', label: { bs: 'Detalji', en: 'Details', de: 'Details' } },
+    { image: 'assets/img/a1-spavaca.webp', thumb: 'assets/img/a1-spavaca-800.webp', group: 'a1', label: { bs: 'Spavaća soba', en: 'Bedroom', de: 'Schlafzimmer' } },
+    { image: 'assets/img/a1-krevet.webp', thumb: 'assets/img/a1-krevet-800.webp', group: 'a1', label: { bs: 'Bračni krevet', en: 'Double bed', de: 'Doppelbett' } },
+    { image: 'assets/img/a1-kuhinja.webp', thumb: 'assets/img/a1-kuhinja-800.webp', group: 'a1', label: { bs: 'Kuhinja', en: 'Kitchen', de: 'Küche' } },
+    { image: 'assets/img/a1-kupatilo.webp', thumb: 'assets/img/a1-kupatilo-800.webp', group: 'a1', label: { bs: 'Kupatilo', en: 'Bathroom', de: 'Badezimmer' } },
+    { image: 'assets/img/a1-tv.webp', thumb: 'assets/img/a1-tv-800.webp', group: 'a1', label: { bs: 'Kutak sa TV-om', en: 'TV corner', de: 'TV-Ecke' } },
+    { image: 'assets/img/a1-sto.webp', thumb: 'assets/img/a1-sto-800.webp', group: 'a1', label: { bs: 'Postavljen sto', en: 'Table set for dinner', de: 'Gedeckter Tisch' } },
+    { image: 'assets/img/a2-boravak.webp', thumb: 'assets/img/a2-boravak-800.webp', group: 'a2', label: { bs: 'Dnevni boravak', en: 'Living room', de: 'Wohnzimmer' } },
+    { image: 'assets/img/a2-trpezarija-kamin.webp', thumb: 'assets/img/a2-trpezarija-kamin-800.webp', group: 'a2', label: { bs: 'Trpezarija i kamin', en: 'Dining area and fireplace', de: 'Essbereich und Kamin' } },
+    { image: 'assets/img/a2-sto-lampe.webp', thumb: 'assets/img/a2-sto-lampe-800.webp', group: 'a2', label: { bs: 'Sto za cijelo društvo', en: 'A table for the whole group', de: 'Ein Tisch für die ganze Gruppe' } },
+    { image: 'assets/img/a2-svijece.webp', thumb: 'assets/img/a2-svijece-800.webp', group: 'a2', label: { bs: 'Večera uz svijeće', en: 'Dinner by candlelight', de: 'Abendessen bei Kerzenlicht' } },
+    { image: 'assets/img/a2-trpezarija.webp', thumb: 'assets/img/a2-trpezarija-800.webp', group: 'a2', label: { bs: 'Trpezarija pod krovnim prozorom', en: 'Dining area under the skylight', de: 'Essbereich unter dem Dachfenster' } },
+    { image: 'assets/img/a2-sofa.webp', thumb: 'assets/img/a2-sofa-800.webp', group: 'a2', label: { bs: 'Ugaona garnitura', en: 'Corner sofa', de: 'Ecksofa' } },
+    { image: 'assets/img/a2-tv.webp', thumb: 'assets/img/a2-tv-800.webp', group: 'a2', label: { bs: 'Kutak sa TV-om', en: 'TV corner', de: 'TV-Ecke' } },
+    { image: 'assets/img/a2-kamin.webp', thumb: 'assets/img/a2-kamin-800.webp', group: 'a2', label: { bs: 'Kamin', en: 'Fireplace', de: 'Kamin' } },
+    { image: 'assets/img/a2-stepenice.webp', thumb: 'assets/img/a2-stepenice-800.webp', group: 'a2', label: { bs: 'Stepenice prema potkrovlju', en: 'Stairs to the attic', de: 'Treppe zum Dachgeschoss' } },
+    { image: 'assets/img/a2-sto.webp', thumb: 'assets/img/a2-sto-800.webp', group: 'a2', label: { bs: 'Postavljen sto', en: 'Table set for dinner', de: 'Gedeckter Tisch' } },
+    { image: 'assets/img/a2-kuhinja.webp', thumb: 'assets/img/a2-kuhinja-800.webp', group: 'a2', label: { bs: 'Kuhinja', en: 'Kitchen', de: 'Küche' } },
+    { image: 'assets/img/a2-spavaca.webp', thumb: 'assets/img/a2-spavaca-800.webp', group: 'a2', label: { bs: 'Spavaća soba', en: 'Bedroom', de: 'Schlafzimmer' } },
+    { image: 'assets/img/a2-detalj.webp', thumb: 'assets/img/a2-detalj-800.webp', group: 'a2', label: { bs: 'Detalji', en: 'Details', de: 'Details' } },
+    { image: 'assets/img/a2-potkrovlje.webp', thumb: 'assets/img/a2-potkrovlje-800.webp', group: 'a2', label: { bs: 'Potkrovlje', en: 'Attic bedroom', de: 'Schlafzimmer im Dachgeschoss' } },
+    { image: 'assets/img/a2-potkrovlje-krevet.webp', thumb: 'assets/img/a2-potkrovlje-krevet-800.webp', group: 'a2', label: { bs: 'Bračni krevet u potkrovlju', en: 'Double bed in the attic', de: 'Doppelbett im Dachgeschoss' } },
+    { image: 'assets/img/a2-kreveti.webp', thumb: 'assets/img/a2-kreveti-800.webp', group: 'a2', label: { bs: 'Kreveti pod krovom', en: 'Beds under the roof', de: 'Betten unter dem Dach' } },
+    { image: 'assets/img/a2-balkonska-vrata.webp', thumb: 'assets/img/a2-balkonska-vrata-800.webp', group: 'a2', label: { bs: 'Izlaz na balkon', en: 'Door to the balcony', de: 'Tür zum Balkon' } },
+    { image: 'assets/img/kuca-sprijeda.webp', thumb: 'assets/img/kuca-sprijeda-800.webp', group: 'out', label: { bs: 'Casa Montana', en: 'Casa Montana', de: 'Casa Montana' } },
+    { image: 'assets/img/kuca-strana.webp', thumb: 'assets/img/kuca-strana-800.webp', group: 'out', label: { bs: 'Kuća u zalasku sunca', en: 'The house at sunset', de: 'Das Haus bei Sonnenuntergang' } },
+    { image: 'assets/img/pogled-balkon.webp', thumb: 'assets/img/pogled-balkon-800.webp', group: 'out', label: { bs: 'Pogled sa balkona', en: 'View from the balcony', de: 'Blick vom Balkon' } },
+    { image: 'assets/img/kuca-zabat.webp', thumb: 'assets/img/kuca-zabat-800.webp', group: 'out', label: { bs: 'Balkoni', en: 'Balconies', de: 'Balkone' } },
+    { image: 'assets/img/pogled-prozor.webp', thumb: 'assets/img/pogled-prozor-800.webp', group: 'out', label: { bs: 'Jutro uz pogled na šumu', en: 'Morning with a forest view', de: 'Morgen mit Blick auf den Wald' } }
   ],
 
   /* --- apartmani (od vlasnika): Apartman 1 do 4 osobe, Apartman 2 do 10 osoba, cijela vikendica do 14 osoba.
-     Apartman 1 ima prave slike, Apartman 2 i cijela vikendica još ilustracije. Raspored kreveta dodati kad ga pošalju. --- */
+     Sve tri kartice imaju prave slike. Raspored kreveta dodati kad ga pošalju. --- */
   rooms: [
     {
       scene: 'lounge', image: 'assets/img/a1-dnevna.webp', thumb: 'assets/img/a1-dnevna-800.webp', label: { bs: 'Apartman 1, dnevna soba', en: 'Apartment 1, living room', de: 'Ferienwohnung 1, Wohnzimmer' }, guests: 4,
@@ -89,13 +118,13 @@ window.VIKENDICA = {
       text: { bs: 'Dnevna soba, kuhinja, spavaća soba i moderno kupatilo. Topao i miran apartman za vikend u dvoje ili porodični odmor.', en: 'Living room, kitchen, bedroom and a modern bathroom. A warm, quiet apartment for a weekend for two or a family break.', de: 'Wohnzimmer, Küche, Schlafzimmer und ein modernes Bad. Eine warme, ruhige Wohnung für ein Wochenende zu zweit oder einen Familienurlaub.' }
     },
     {
-      scene: 'living', guests: 10,
+      scene: 'living', image: 'assets/img/a2-boravak.webp', thumb: 'assets/img/a2-boravak-800.webp', label: { bs: 'Apartman 2, dnevni boravak', en: 'Apartment 2, living room', de: 'Ferienwohnung 2, Wohnzimmer' }, guests: 10,
       title: { bs: 'Apartman 2', en: 'Apartment 2', de: 'Ferienwohnung 2' },
       beds: { bs: 'Za veću porodicu ili društvo', en: 'For a bigger family or a group of friends', de: 'Für größere Familien oder Freundesgruppen' },
-      text: { bs: 'Prostran apartman na etaži, mjesta za cijelo društvo, za duge večeri i zajedničke ručkove.', en: 'A spacious apartment over a whole floor, with room for the whole group, long evenings and shared meals.', de: 'Eine geräumige Wohnung über eine ganze Etage, mit Platz für die ganze Gruppe, lange Abende und gemeinsame Mahlzeiten.' }
+      text: { bs: 'Prostran apartman na dva nivoa: dnevni boravak sa kaminom, trpezarija sa velikim stolom, kuhinja i spavaća soba, a gore potkrovlje sa krevetima pod krovom i izlazom na balkon.', en: 'A spacious apartment on two levels: a living room with a fireplace, a dining area with a big table, a kitchen and a bedroom, plus an attic with beds under the roof and a door to the balcony.', de: 'Eine geräumige Wohnung auf zwei Ebenen: Wohnzimmer mit Kamin, Essbereich mit großem Tisch, Küche und Schlafzimmer, dazu ein Dachgeschoss mit Betten unter dem Dach und Zugang zum Balkon.' }
     },
     {
-      scene: 'exterior', guests: 14,
+      scene: 'exterior', image: 'assets/img/kuca-strana.webp', thumb: 'assets/img/kuca-strana-800.webp', label: { bs: 'Casa Montana izvana', en: 'Casa Montana from outside', de: 'Casa Montana von außen' }, guests: 14,
       title: { bs: 'Cijela vikendica', en: 'The whole house', de: 'Das ganze Haus' },
       beds: { bs: 'Oba apartmana, samo za vas', en: 'Both apartments, just for you', de: 'Beide Wohnungen, nur für Sie' },
       text: { bs: 'Cijela Casa Montana bez drugih gostiju: za velike porodice, proslave i zimovanja sa prijateljima.', en: 'All of Casa Montana with no other guests: for large families, celebrations and winter trips with friends.', de: 'Die ganze Casa Montana ohne andere Gäste: für große Familien, Feiern und Winterurlaub mit Freunden.' }
@@ -122,6 +151,21 @@ window.VIKENDICA = {
     ]
   },
 
+  /* --- pogled: sekcija sa slikom kroz balkonska vrata --- */
+  view: {
+    eyebrow: { bs: 'Pogled', en: 'The view', de: 'Die Aussicht' },
+    title: { bs: 'Jutro uz planinu', en: 'Mornings with a mountain view', de: 'Morgens mit Blick auf die Berge' },
+    images: [
+      { image: 'assets/img/pogled-balkon.webp', thumb: 'assets/img/pogled-balkon-800.webp', label: { bs: 'Pogled sa balkona', en: 'View from the balcony', de: 'Blick vom Balkon' } },
+      { image: 'assets/img/pogled-prozor.webp', thumb: 'assets/img/pogled-prozor-800.webp', label: { bs: 'Jutro uz pogled na šumu', en: 'Morning with a forest view', de: 'Morgen mit Blick auf den Wald' } }
+    ],
+    text: {
+      bs: ['Otvorite balkonska vrata i ispred vas su jele, šuma i vrhovi Vlašića.', 'Jutarnja kafa na balkonu, svjež planinski zrak i tišina. Upravo zbog toga ljudi dolaze na planinu.'],
+      en: ['Open the balcony door and you will see fir trees, forest and the peaks of Vlašić.', 'Morning coffee on the balcony, fresh mountain air and quiet. This is exactly why people come to the mountain.'],
+      de: ['Öffnen Sie die Balkontür und vor Ihnen liegen Tannen, Wald und die Gipfel des Vlašić.', 'Morgenkaffee auf dem Balkon, frische Bergluft und Ruhe. Genau deshalb kommt man in die Berge.']
+    }
+  },
+
   /* --- sadržaji: kamin, kafe aparati, podno grijanje, toplotna pumpa i kupatilo potvrđeni (Instagram);
      Wi-Fi, parking, kuhinja, posteljina i TV PROVJERITI sa vlasnicima --- */
   amenities: [
@@ -146,7 +190,7 @@ window.VIKENDICA = {
     msgRoom: { bs: 'Apartman: {r}.', en: 'Apartment: {r}.', de: 'Ferienwohnung: {r}.' },
     aboutTitle: { bs: 'O nama', en: 'About us', de: 'Über uns' },
     guideRooms: { bs: { one: '{n} apartman', few: '{n} apartmana', other: '{n} apartmana' }, en: { one: '{n} apartment', other: '{n} apartments' }, de: { one: '{n} Ferienwohnung', other: '{n} Ferienwohnungen' } },
-    galleryLead: { bs: 'Pogledajte Apartman 1. Fotografije Apartmana 2 stižu uskoro.', en: 'Take a look around Apartment 1. Photos of Apartment 2 coming soon.', de: 'Sehen Sie sich Ferienwohnung 1 an. Fotos von Ferienwohnung 2 folgen in Kürze.' },
+    galleryLead: { bs: 'Pogledajte svaki apartman i kuću izvana.', en: 'Take a look at each apartment and the house from outside.', de: 'Sehen Sie sich jede Wohnung und das Haus von außen an.' },
     sendTo: { bs: 'Pošalji na broj', en: 'Send to', de: 'Senden an' },
     amenitiesLead: { bs: 'Sve što treba za ugodan boravak.', en: 'Everything you need for a comfortable stay.', de: 'Alles für einen angenehmen Aufenthalt.' }
   },

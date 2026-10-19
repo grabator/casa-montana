@@ -131,6 +131,8 @@
         '<source src="' + esc(D.heroVideo) + '" type="video/mp4">' +
         (D.heroVideoWebm ? '<source src="' + esc(D.heroVideoWebm) + '" type="video/webm">' : '') + '</video>';
     }
+    /* heroImageWide = širi kadar za laptop (od 900px), heroImage = uspravni za mobitel */
+    if (D.heroImage && D.heroImageWide) return '<picture><source media="(min-width: 900px)" srcset="' + esc(D.heroImageWide) + '"><img src="' + esc(D.heroImage) + '" alt="" class="hero-img" fetchpriority="high"></picture>';
     return D.heroImage ? '<img src="' + esc(D.heroImage) + '" alt="" class="hero-img">' : SC.exterior();
   }
   function heroTitle() {
@@ -176,17 +178,42 @@
       }).join('') + '</ul></div></section>';
   }
 
-  function gallery() {
+  /* galerija: D.galleryTabs = [{ id, label }] + group na svakoj slici; bez tabova sve slike odjednom */
+  var gTab = D.galleryTabs && D.galleryTabs.length ? D.galleryTabs[0].id : null;
+  function gItems() { return gTab ? D.gallery.filter(function (g) { return g.group === gTab; }) : D.gallery; }
+  function galleryList(shown) {
     /* zadnja slika popuni ostatak reda (mobitel: 2 kolone, desktop: 3 kolone, prva slika je velika) */
-    var n = D.gallery.length;
+    var list = gItems(), n = list.length;
     var spanM = 2 - ((2 + n - 2) % 2), spanD = 3 - ((4 + n - 2) % 3);
-    var items = D.gallery.map(function (g, i) {
+    return list.map(function (g, i) {
       var last = i === n - 1 && i > 0;
-      return '<li class="g-item reveal' + (i === 0 ? ' g-wide' : '') + (last ? ' g-last' + (spanM === 2 ? ' g-pano-m' : '') + (spanD === 3 ? ' g-pano-d' : '') : '') + '" style="--d:' + i + (last ? ';--span-m:' + spanM + ';--span-d:' + spanD : '') + '">' +
+      return '<li class="g-item reveal' + (shown ? ' in' : '') + (i === 0 ? ' g-wide' : '') + (last ? ' g-last' + (spanM === 2 ? ' g-pano-m' : '') + (spanD === 3 ? ' g-pano-d' : '') : '') + '" style="--d:' + Math.min(i, 8) + (last ? ';--span-m:' + spanM + ';--span-d:' + spanD : '') + '">' +
         '<button type="button" class="g-btn" data-g="' + i + '" aria-label="' + esc(t('galleryOpen')) + ': ' + esc(L(g.label)) + '">' +
         '<span class="g-art">' + sceneOrImage(g) + '</span><span class="g-cap">' + esc(L(g.label)) + '</span></button></li>';
     }).join('');
-    return section('gallery', null, t('galleryTitle'), t('galleryLead'), '<ul class="gallery">' + items + '</ul>');
+  }
+  function gallery() {
+    var tabs = gTab ? '<div class="g-tabs reveal" role="tablist" aria-label="' + esc(t('galleryTitle')) + '">' + D.galleryTabs.map(function (tb) {
+      var cnt = D.gallery.filter(function (g) { return g.group === tb.id; }).length;
+      return '<button type="button" role="tab" data-gtab="' + esc(tb.id) + '" aria-selected="' + (tb.id === gTab) + '">' + esc(L(tb.label)) + '<small>' + cnt + '</small></button>';
+    }).join('') + '</div>' : '';
+    return section('gallery', null, t('galleryTitle'), t('galleryLead'), tabs + '<ul class="gallery" id="g-list">' + galleryList() + '</ul>');
+  }
+  function setGTab(id) {
+    if (id === gTab) return;
+    gTab = id;
+    document.querySelectorAll('[data-gtab]').forEach(function (b) { b.setAttribute('aria-selected', String(b.getAttribute('data-gtab') === id)); });
+    document.getElementById('g-list').innerHTML = galleryList(true);
+  }
+
+  /* pogled (opcionalno): D.view = { title, lead, text: [..], images: [veća, manja] } */
+  function view() {
+    var V = D.view;
+    if (!V) return '';
+    var body = '<div class="view-grid"><div class="view-art reveal"><div class="frame">' + sceneOrImage(V.images[0], '', '(min-width: 900px) 40vw, 100vw') + '</div>' +
+      (V.images[1] ? '<div class="frame frame-2">' + sceneOrImage(V.images[1], '', '(min-width: 900px) 20vw, 50vw') + '</div>' : '') + '</div>' +
+      '<div class="view-text">' + L(V.text).map(function (p, i) { return '<p class="reveal" style="--d:' + i + '">' + esc(p) + '</p>'; }).join('') + '</div></div>';
+    return section('view', L(V.eyebrow), L(V.title), null, body);
   }
 
   function about() {
@@ -438,13 +465,14 @@
   }
 
   /* ---------------- vodič (meni): pločice sa svim dijelovima stranice ---------------- */
-  var GUIDE_ICONS = { gallery: 'image', rooms: 'bed', about: 'home', amenities: 'spark', breakfast: 'coffee', prices: 'tag', calc: 'calendar', location: 'pin', activities: 'ski', reviews: 'star', faq: 'chat', instagram: 'insta', contact: 'phone' };
+  var GUIDE_ICONS = { view: 'view', gallery: 'image', rooms: 'bed', about: 'home', amenities: 'spark', breakfast: 'coffee', prices: 'tag', calc: 'calendar', location: 'pin', activities: 'ski', reviews: 'star', faq: 'chat', instagram: 'insta', contact: 'phone' };
   function guideMeta(id) {
     var c = D.contact || {};
     switch (id) {
       case 'gallery': return plural(t('guidePhotos'), D.gallery.length);
       case 'rooms': return plural(t('guideRooms'), D.rooms.length);
       case 'about': return t('aboutEyebrow');
+      case 'view': return L(D.view.eyebrow);
       case 'amenities': return plural(t('guideAmen'), D.amenities.length);
       case 'breakfast': return L(D.breakfast.time) || t('breakfastEyebrow');
       case 'prices': return t('guideFrom', { p: money(Math.min(P.winter, P.summer)), c: P.currency });
@@ -630,7 +658,7 @@
     document.querySelector('.skip').textContent = t('skip');
     document.getElementById('topbar').innerHTML = topbar();
     document.getElementById('top').innerHTML = hero();
-    document.getElementById('main').innerHTML = facts() + gallery() + rooms() + about() + ribbon() + amenities() + breakfast() + prices() + calc() + location() + activities() + reviews() + faq() + instagram() + contact();
+    document.getElementById('main').innerHTML = facts() + gallery() + rooms() + about() + view() + ribbon() + amenities() + breakfast() + prices() + calc() + location() + activities() + reviews() + faq() + instagram() + contact();
     document.getElementById('foot').innerHTML = footer();
     document.getElementById('dock').innerHTML = dock();
     var tt = document.getElementById('to-top-wrap');
@@ -1001,12 +1029,12 @@
     el.querySelector('.lb-close').focus();
   }
   function showLb(dir) {
-    var g = D.gallery[lb.i], stage = lb.el.querySelector('.lb-stage');
+    var list = gItems(), g = list[lb.i], stage = lb.el.querySelector('.lb-stage');
     stage.innerHTML = '<div class="lb-art' + (dir ? (dir > 0 ? ' from-r' : ' from-l') : '') + '">' + sceneOrImage(g, '', '100vw') + '</div>';
     lb.el.querySelector('.lb-cap').textContent = L(g.label);
-    lb.el.querySelector('.lb-count').textContent = (lb.i + 1) + ' / ' + D.gallery.length;
+    lb.el.querySelector('.lb-count').textContent = (lb.i + 1) + ' / ' + list.length;
   }
-  function stepLb(dir) { lb.i = (lb.i + dir + D.gallery.length) % D.gallery.length; showLb(dir); }
+  function stepLb(dir) { var n = gItems().length; lb.i = (lb.i + dir + n) % n; showLb(dir); }
   function closeLb() {
     if (!lb.el || lb.el.hidden) return;
     lb.el.classList.remove('open');
@@ -1128,6 +1156,8 @@
       var ddr = document.getElementById('dd-r'), opt = ddr && ddr.querySelector('li[data-v="' + form.room + '"]');
       if (opt) { ddr.setAttribute('data-value', form.room); ddr.querySelector('.dd-val').textContent = opt.textContent; ddr.querySelectorAll('li').forEach(function (x) { x.setAttribute('aria-selected', String(x === opt)); }); }
     }
+    var gt = e.target.closest('[data-gtab]');
+    if (gt) { setGTab(gt.getAttribute('data-gtab')); return; }
     var gb = e.target.closest('.g-btn');
     if (gb) { openLightbox(+gb.getAttribute('data-g')); return; }
     if (e.target.closest('.lb-close')) { closeLb(); return; }
