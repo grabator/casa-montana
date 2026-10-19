@@ -60,7 +60,7 @@ window.VIKENDICA = {
       { id: 'ba', label: { bs: 'Broj u BiH', en: 'Bosnian number', de: 'Nummer in Bosnien' }, phone: '+387 62 429 330', viber: '+38762429330', whatsapp: '38762429330' },
       { id: 'de', label: { bs: 'Broj u Njemačkoj', en: 'German number', de: 'Nummer in Deutschland' }, phone: '+49 172 9216987', viber: '+491729216987', whatsapp: '491729216987' }
     ],
-    email: 'casamontanavlasic@gmail.com',
+    email: 'casa.montana.vlasic@gmail.com',
     instagram: 'casa.montana.vlasic'
   },
 
