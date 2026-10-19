@@ -2,7 +2,7 @@
 
 Website for Casa Montana, mountain apartments on Vlašić ([@casa.montana.vlasic](https://www.instagram.com/casa.montana.vlasic/)).
 
-**Live:** https://casa-montana.grabafaceit.workers.dev
+**Live:** https://casamontanavlasic.com
 
 ## What's inside
 

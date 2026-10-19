@@ -1,5 +1,5 @@
-# Demo: stranica ima "noindex" u index.html. Za pravog klijenta vidi README, "SEO".
+# Stranica ima "noindex" u index.html dok ne stignu pravi kontakt podaci. Vidi README, "SEO".
 User-agent: *
 Allow: /
 
-Sitemap: https://casa-montana.grabafaceit.workers.dev/sitemap.xml
+Sitemap: https://casamontanavlasic.com/sitemap.xml
