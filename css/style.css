@@ -868,8 +868,13 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .lbl-long { display: none; } .lbl-short { display: inline; }
   .hero-chips li { padding: 6px 11px; font-size: 0.8125rem; gap: 6px; }
   .hero-chips .ic { width: 16px; height: 16px; }
-  /* apartmani: jedan ispod drugog (bez listanja u stranu, da ništa ne hvata prst dok se lista stranica) */
-  .rooms { gap: 14px; }
+  /* apartmani: listaju se samo u stranu, vidi se dio sljedećeg.
+     overflow-y: hidden i touch-action: pan-x pan-y = vertikalni pokret prsta uvijek ide stranici, nikad ne zapne u traci */
+  .rooms { grid-auto-flow: column; grid-auto-columns: 84%; grid-template-columns: none; align-items: stretch; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; touch-action: pan-x pan-y; scroll-snap-type: x mandatory; margin-inline: -16px; padding: 4px 16px 18px; scroll-padding-inline: 16px; scrollbar-width: none; }
+  .rooms::-webkit-scrollbar { display: none; }
+  .room { scroll-snap-align: start; }
+  /* kartice se ne pomjeraju gore-dolje dok se pojavljuju (to je pravilo mali vertikalni skrol u traci) */
+  .rooms .room.reveal { transform: none; }
   .room-art { aspect-ratio: 16 / 10; }
   .room-body { padding: 16px 18px 18px; gap: 8px; }
   .room-body h3 { font-size: 1.3rem; }

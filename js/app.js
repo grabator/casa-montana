@@ -358,14 +358,15 @@
     var signs = (D.distances || []).map(function (d, i) {
       return '<li class="sign reveal" style="--d:' + i + '">' + ic(d.icon) + '<span class="sign-place">' + esc(L(d.place)) + '</span><span class="sign-time">' + esc(L(d.time)) + '</span></li>';
     }).join('');
-    var map = '<div class="map reveal">' + (D.locationImage ? '<img src="' + esc(D.locationImage) + '" alt="' + esc(t('locationTitle')) + '" loading="lazy" class="map-img">' : mapSvg()) + '<a class="btn btn-small map-btn" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(D.mapQuery) + '" target="_blank" rel="noopener">' + ic('pin') + esc(t('openMaps')) + '</a></div>';
+    var map = '<div class="map reveal">' + (D.locationImage ? '<img src="' + esc(D.locationImage) + '" alt="' + esc(t('locationTitle')) + '" loading="lazy" class="map-img">' : mapSvg()) + '<a class="btn btn-small map-btn" href="' + esc(D.mapUrl || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(D.mapQuery)) + '" target="_blank" rel="noopener">' + ic('pin') + esc(t('openMaps')) + '</a></div>';
     return section('location', null, t('locationTitle'), L(D.locationLead) || t('locationLead'), '<div class="loc-grid">' + map + (signs ? '<ul class="signs">' + signs + '</ul>' : '') + '</div>' + directions());
   }
   /* kako doći (opcionalno): D.directions = { destination: 'lat,lon' ili adresa, steps: [{ icon, text }], tip } */
   function directions() {
     var R = D.directions;
     if (!R) return '';
-    var nav = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(R.destination || D.mapQuery);
+    /* D.mapUrl = tačan pin kuće (link iz Google Maps); otvori ga i odatle je navigacija jedan dodir */
+    var nav = D.mapUrl || 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(R.destination || D.mapQuery);
     return '<div class="dirs reveal"><div class="dirs-head"><h3>' + esc(t('dirTitle')) + '</h3>' +
       '<a class="btn btn-primary" href="' + esc(nav) + '" target="_blank" rel="noopener">' + ic('nav') + esc(t('dirNavigate')) + '</a></div>' +
       '<ol class="dirs-steps">' + (R.steps || []).map(function (st, i) {

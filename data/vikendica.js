@@ -204,7 +204,7 @@ window.VIKENDICA = {
   maxGuests: 14,
   minNights: 1,
 
-  /* --- lokacija: Babanovac (tačan Google Maps pin vlasnici šalju naknadno) --- */
+  /* --- lokacija: Babanovac, tačan pin je mapUrl --- */
   distances: [
     { icon: 'ski', place: { bs: 'Ski staze Babanovac', en: 'Babanovac ski slopes', de: 'Skipisten Babanovac' }, time: { bs: 'u blizini', en: 'nearby', de: 'in der Nähe' } },
     { icon: 'car', place: { bs: 'Travnik', en: 'Travnik', de: 'Travnik' }, time: { bs: '35 min', en: '35 min', de: '35 Min.' } },
@@ -212,6 +212,8 @@ window.VIKENDICA = {
     { icon: 'car', place: { bs: 'Banja Luka', en: 'Banja Luka', de: 'Banja Luka' }, time: { bs: '2 h', en: '2 h', de: '2 Std.' } }
   ],
   mapQuery: 'Babanovac, Vlašić',
+  /* tačna lokacija kuće (od vlasnika) */
+  mapUrl: 'https://maps.app.goo.gl/5Cy8VCSUDwaumFW18',
   locationLead: { bs: 'U samom centru Babanovca, na Vlašiću, planini iznad Travnika.', en: 'Right in the centre of Babanovac on Vlašić, the mountain above Travnik.', de: 'Mitten im Zentrum von Babanovac auf dem Vlašić, dem Berg oberhalb von Travnik.' },
 
   /* --- šta raditi --- */
@@ -238,7 +240,7 @@ window.VIKENDICA = {
   /* vrijeme uživo (open-meteo.com), koordinate Babanovca */
   weather: { lat: 44.29, lon: 17.65, title: { bs: 'Trenutno na Vlašiću', en: 'Right now on Vlašić', de: 'Aktuell auf dem Vlašić' } },
 
-  /* --- kako doći: do Babanovca, dok ne stigne tačan Google Maps link --- */
+  /* --- kako doći: do Babanovca, dugme vodi na tačan pin (mapUrl) --- */
   directions: {
     destination: 'Babanovac, Vlašić',
     steps: [
