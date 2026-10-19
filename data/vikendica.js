@@ -39,9 +39,9 @@ window.VIKENDICA = {
   /* prava slika za prvi ekran (uspravna za mobitel) i heroImageWide za laptop; null = ilustracija. Video: heroVideo, heroVideoWebm, heroPoster */
   heroImage: 'assets/img/hero-mobitel.webp',
   heroImageWide: 'assets/img/hero-laptop.webp',
-  /* na mobitelu: video (zavjese se razmaknu), odsvira jednom; slika ostaje kao rezerva */
-  heroVideoMobile: 'assets/video/jutro.mp4',
-  heroVideoPoster: 'assets/img/video-jutro.webp',
+  /* na mobitelu: video (zavjese se razmaknu), vrti se u krug; slika ostaje kao rezerva */
+  heroVideoMobile: 'assets/video/jutro-petlja.mp4',
+  heroVideoPoster: 'assets/img/video-jutro-petlja.webp',
   /* bez prekidača zima/ljeto i bez pahulja i listića preko fotografije */
   seasons: false,
   effects: false,
@@ -113,7 +113,7 @@ window.VIKENDICA = {
     { image: 'assets/img/pogled-balkon.webp', thumb: 'assets/img/pogled-balkon-800.webp', group: 'out', label: { bs: 'Pogled sa balkona', en: 'View from the balcony', de: 'Blick vom Balkon' } },
     { image: 'assets/img/kuca-zabat.webp', thumb: 'assets/img/kuca-zabat-800.webp', group: 'out', label: { bs: 'Balkoni', en: 'Balconies', de: 'Balkone' } },
     { image: 'assets/img/pogled-prozor.webp', thumb: 'assets/img/pogled-prozor-800.webp', group: 'out', label: { bs: 'Jutro uz pogled na šumu', en: 'Morning with a forest view', de: 'Morgen mit Blick auf den Wald' } },
-    { video: 'assets/video/jutro.mp4', poster: 'assets/img/video-jutro.webp', thumb: 'assets/img/video-jutro-360.webp', group: 'video', label: { bs: 'Jutro uz pogled', en: 'Morning with a view', de: 'Morgen mit Aussicht' } },
+    { video: 'assets/video/jutro-petlja.mp4', poster: 'assets/img/video-jutro-petlja.webp', thumb: 'assets/img/video-jutro-petlja-360.webp', group: 'video', label: { bs: 'Jutro uz pogled', en: 'Morning with a view', de: 'Morgen mit Aussicht' } },
     { video: 'assets/video/kamin.mp4', poster: 'assets/img/video-kamin.webp', thumb: 'assets/img/video-kamin-360.webp', group: 'video', label: { bs: 'Kamin i trpezarija', en: 'Fireplace and dining area', de: 'Kamin und Essbereich' } },
     { video: 'assets/video/svijece.mp4', poster: 'assets/img/video-svijece.webp', thumb: 'assets/img/video-svijece-360.webp', group: 'video', label: { bs: 'Večera uz svijeće', en: 'Dinner by candlelight', de: 'Abendessen bei Kerzenlicht' } },
     { video: 'assets/video/stepenice.mp4', poster: 'assets/img/video-stepenice.webp', thumb: 'assets/img/video-stepenice-360.webp', group: 'video', label: { bs: 'Stepenice i kamin', en: 'Stairs and fireplace', de: 'Treppe und Kamin' } },

@@ -132,7 +132,7 @@
         (D.heroVideoWebm ? '<source src="' + esc(D.heroVideoWebm) + '" type="video/webm">' : '') + '</video>';
     }
     /* heroVideoMobile: kratki uspravni video samo na mobitelu (ne kad štedi podatke ili ne želi animacije); ako ne krene, ostaje slika */
-    if (D.heroVideoMobile && heroVideoOk()) return '<video class="hero-img hero-video" src="' + esc(D.heroVideoMobile) + '" muted playsinline autoplay preload="auto"' + (D.heroVideoPoster ? ' poster="' + esc(D.heroVideoPoster) + '"' : '') + ' aria-hidden="true"></video>';
+    if (D.heroVideoMobile && heroVideoOk()) return '<video class="hero-img hero-video" src="' + esc(D.heroVideoMobile) + '" muted playsinline autoplay loop preload="auto"' + (D.heroVideoPoster ? ' poster="' + esc(D.heroVideoPoster) + '"' : '') + ' aria-hidden="true"></video>';
     return heroPicture();
   }
   function heroVideoOk() {
@@ -693,7 +693,7 @@
     bindHeroVideo();
   }
 
-  /* video na prvom ekranu: odsvira jednom i stane na zadnjem kadru; ako ne može da krene (npr. Safari ne dobije video), vrati sliku */
+  /* video na prvom ekranu: vrti se u krug (kraj se pretapa u početak); ako ne može da krene (npr. Safari ne dobije video), vrati sliku */
   function bindHeroVideo() {
     var v = document.querySelector('.hero-video');
     if (!v || !D.heroVideoMobile) return;
