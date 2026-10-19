@@ -39,6 +39,9 @@ window.VIKENDICA = {
   /* prava slika za prvi ekran (uspravna za mobitel) i heroImageWide za laptop; null = ilustracija. Video: heroVideo, heroVideoWebm, heroPoster */
   heroImage: 'assets/img/hero-mobitel.webp',
   heroImageWide: 'assets/img/hero-laptop.webp',
+  /* na mobitelu: video (zavjese se razmaknu), odsvira jednom; slika ostaje kao rezerva */
+  heroVideoMobile: 'assets/video/jutro.mp4',
+  heroVideoPoster: 'assets/img/video-jutro.webp',
   /* bez prekidača zima/ljeto i bez pahulja i listića preko fotografije */
   seasons: false,
   effects: false,
@@ -73,7 +76,8 @@ window.VIKENDICA = {
   galleryTabs: [
     { id: 'a1', label: { bs: 'Apartman 1', en: 'Apartment 1', de: 'Ferienwohnung 1' } },
     { id: 'a2', label: { bs: 'Apartman 2', en: 'Apartment 2', de: 'Ferienwohnung 2' } },
-    { id: 'out', label: { bs: 'Kuća i pogled', en: 'House and view', de: 'Haus und Aussicht' } }
+    { id: 'out', label: { bs: 'Kuća i pogled', en: 'House and view', de: 'Haus und Aussicht' } },
+    { id: 'video', icon: 'play', label: { bs: 'Video', en: 'Video', de: 'Video' } }
   ],
   gallery: [
     { image: 'assets/img/a1-dnevna.webp', thumb: 'assets/img/a1-dnevna-800.webp', group: 'a1', label: { bs: 'Dnevna soba', en: 'Living room', de: 'Wohnzimmer' } },
@@ -108,7 +112,12 @@ window.VIKENDICA = {
     { image: 'assets/img/kuca-strana.webp', thumb: 'assets/img/kuca-strana-800.webp', group: 'out', label: { bs: 'Kuća u zalasku sunca', en: 'The house at sunset', de: 'Das Haus bei Sonnenuntergang' } },
     { image: 'assets/img/pogled-balkon.webp', thumb: 'assets/img/pogled-balkon-800.webp', group: 'out', label: { bs: 'Pogled sa balkona', en: 'View from the balcony', de: 'Blick vom Balkon' } },
     { image: 'assets/img/kuca-zabat.webp', thumb: 'assets/img/kuca-zabat-800.webp', group: 'out', label: { bs: 'Balkoni', en: 'Balconies', de: 'Balkone' } },
-    { image: 'assets/img/pogled-prozor.webp', thumb: 'assets/img/pogled-prozor-800.webp', group: 'out', label: { bs: 'Jutro uz pogled na šumu', en: 'Morning with a forest view', de: 'Morgen mit Blick auf den Wald' } }
+    { image: 'assets/img/pogled-prozor.webp', thumb: 'assets/img/pogled-prozor-800.webp', group: 'out', label: { bs: 'Jutro uz pogled na šumu', en: 'Morning with a forest view', de: 'Morgen mit Blick auf den Wald' } },
+    { video: 'assets/video/jutro.mp4', poster: 'assets/img/video-jutro.webp', thumb: 'assets/img/video-jutro-360.webp', group: 'video', label: { bs: 'Jutro uz pogled', en: 'Morning with a view', de: 'Morgen mit Aussicht' } },
+    { video: 'assets/video/kamin.mp4', poster: 'assets/img/video-kamin.webp', thumb: 'assets/img/video-kamin-360.webp', group: 'video', label: { bs: 'Kamin i trpezarija', en: 'Fireplace and dining area', de: 'Kamin und Essbereich' } },
+    { video: 'assets/video/svijece.mp4', poster: 'assets/img/video-svijece.webp', thumb: 'assets/img/video-svijece-360.webp', group: 'video', label: { bs: 'Večera uz svijeće', en: 'Dinner by candlelight', de: 'Abendessen bei Kerzenlicht' } },
+    { video: 'assets/video/stepenice.mp4', poster: 'assets/img/video-stepenice.webp', thumb: 'assets/img/video-stepenice-360.webp', group: 'video', label: { bs: 'Stepenice i kamin', en: 'Stairs and fireplace', de: 'Treppe und Kamin' } },
+    { video: 'assets/video/spavaca.mp4', poster: 'assets/img/video-spavaca.webp', thumb: 'assets/img/video-spavaca-360.webp', group: 'video', label: { bs: 'Spavaća soba', en: 'Bedroom', de: 'Schlafzimmer' } }
   ],
 
   /* --- apartmani (od vlasnika): Apartman 1 do 4 osobe, Apartman 2 do 10 osoba, cijela vikendica do 14 osoba.
@@ -190,6 +199,7 @@ window.VIKENDICA = {
     roomsTitle: { bs: 'Apartmani', en: 'Apartments', de: 'Ferienwohnungen' },
     askRoom: { bs: 'Pitaj za ovaj apartman', en: 'Ask about this apartment', de: 'Nach dieser Wohnung fragen' },
     roomPhotos: { bs: 'Slike', en: 'Photos', de: 'Fotos' },
+    videoPlay: { bs: 'Pusti video', en: 'Play video', de: 'Video abspielen' },
     roomType: { bs: 'Apartman', en: 'Apartment', de: 'Ferienwohnung' },
     msgRoom: { bs: 'Apartman: {r}.', en: 'Apartment: {r}.', de: 'Ferienwohnung: {r}.' },
     aboutTitle: { bs: 'O nama', en: 'About us', de: 'Über uns' },

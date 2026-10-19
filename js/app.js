@@ -131,6 +131,15 @@
         '<source src="' + esc(D.heroVideo) + '" type="video/mp4">' +
         (D.heroVideoWebm ? '<source src="' + esc(D.heroVideoWebm) + '" type="video/webm">' : '') + '</video>';
     }
+    /* heroVideoMobile: kratki uspravni video samo na mobitelu (ne kad štedi podatke ili ne želi animacije); ako ne krene, ostaje slika */
+    if (D.heroVideoMobile && heroVideoOk()) return '<video class="hero-img hero-video" src="' + esc(D.heroVideoMobile) + '" muted playsinline autoplay preload="auto"' + (D.heroVideoPoster ? ' poster="' + esc(D.heroVideoPoster) + '"' : '') + ' aria-hidden="true"></video>';
+    return heroPicture();
+  }
+  function heroVideoOk() {
+    var c = navigator.connection;
+    return window.matchMedia('(max-width: 899px)').matches && !reduced && !(c && c.saveData);
+  }
+  function heroPicture() {
     /* heroImageWide = širi kadar za laptop (od 900px), heroImage = uspravni za mobitel */
     if (D.heroImage && D.heroImageWide) return '<picture><source media="(min-width: 900px)" srcset="' + esc(D.heroImageWide) + '"><img src="' + esc(D.heroImage) + '" alt="" class="hero-img" fetchpriority="high"></picture>';
     return D.heroImage ? '<img src="' + esc(D.heroImage) + '" alt="" class="hero-img">' : SC.exterior();
@@ -185,6 +194,11 @@
     /* zadnja slika popuni ostatak reda (mobitel: 2 kolone, desktop: 3 kolone, prva slika je velika) */
     var list = gItems(), n = list.length;
     var spanM = 2 - ((2 + n - 2) % 2), spanD = 3 - ((4 + n - 2) % 3);
+    if (gTab === 'video') return list.map(function (g, i) {
+      return '<li class="g-item g-vid reveal' + (shown ? ' in' : '') + '" style="--d:' + i + '">' +
+        '<button type="button" class="g-btn" data-g="' + i + '" aria-label="' + esc(t('videoPlay')) + ': ' + esc(L(g.label)) + '">' +
+        '<span class="g-art"><img src="' + esc(g.thumb) + '" alt="" loading="lazy" decoding="async"></span><span class="g-play" aria-hidden="true">' + ic('play') + '</span><span class="g-cap">' + esc(L(g.label)) + '</span></button></li>';
+    }).join('');
     return list.map(function (g, i) {
       var last = i === n - 1 && i > 0;
       return '<li class="g-item reveal' + (shown ? ' in' : '') + (i === 0 ? ' g-wide' : '') + (last ? ' g-last' + (spanM === 2 ? ' g-pano-m' : '') + (spanD === 3 ? ' g-pano-d' : '') : '') + '" style="--d:' + Math.min(i, 8) + (last ? ';--span-m:' + spanM + ';--span-d:' + spanD : '') + '">' +
@@ -195,15 +209,17 @@
   function gallery() {
     var tabs = gTab ? '<div class="g-tabs reveal" role="tablist" aria-label="' + esc(t('galleryTitle')) + '">' + D.galleryTabs.map(function (tb) {
       var cnt = D.gallery.filter(function (g) { return g.group === tb.id; }).length;
-      return '<button type="button" role="tab" data-gtab="' + esc(tb.id) + '" aria-selected="' + (tb.id === gTab) + '">' + esc(L(tb.label)) + '<small>' + cnt + '</small></button>';
+      return '<button type="button" role="tab" data-gtab="' + esc(tb.id) + '" aria-selected="' + (tb.id === gTab) + '">' + (tb.icon ? ic(tb.icon) : '') + esc(L(tb.label)) + '<small>' + cnt + '</small></button>';
     }).join('') + '</div>' : '';
-    return section('gallery', null, t('galleryTitle'), t('galleryLead'), tabs + '<ul class="gallery" id="g-list">' + galleryList() + '</ul>');
+    return section('gallery', null, t('galleryTitle'), t('galleryLead'), tabs + '<ul class="gallery' + (gTab === 'video' ? ' gallery-video' : '') + '" id="g-list">' + galleryList() + '</ul>');
   }
   function setGTab(id) {
     if (id === gTab) return;
     gTab = id;
     document.querySelectorAll('[data-gtab]').forEach(function (b) { b.setAttribute('aria-selected', String(b.getAttribute('data-gtab') === id)); });
-    document.getElementById('g-list').innerHTML = galleryList(true);
+    var ul = document.getElementById('g-list');
+    ul.classList.toggle('gallery-video', id === 'video');
+    ul.innerHTML = galleryList(true);
   }
 
   /* pogled (opcionalno): D.view = { title, lead, text: [..], images: [veća, manja] } */
@@ -471,7 +487,7 @@
   function guideMeta(id) {
     var c = D.contact || {};
     switch (id) {
-      case 'gallery': return plural(t('guidePhotos'), D.gallery.length);
+      case 'gallery': return plural(t('guidePhotos'), D.gallery.filter(function (g) { return !g.video; }).length);
       case 'rooms': return plural(t('guideRooms'), D.rooms.length);
       case 'about': return t('aboutEyebrow');
       case 'view': return L(D.view.eyebrow);
@@ -674,6 +690,24 @@
     observeReveal();
     Spy.start();
     if (D.effects !== false) FX.start(document.querySelector('.fx'));
+    bindHeroVideo();
+  }
+
+  /* video na prvom ekranu: odsvira jednom i stane na zadnjem kadru; ako ne može da krene (npr. Safari ne dobije video), vrati sliku */
+  function bindHeroVideo() {
+    var v = document.querySelector('.hero-video');
+    if (!v || !D.heroVideoMobile) return;
+    var done = false;
+    function fallback() {
+      if (done) return; done = true;
+      var art = v.parentNode;
+      if (art) art.innerHTML = heroPicture();
+    }
+    v.addEventListener('error', fallback);
+    v.addEventListener('playing', function () { done = true; });
+    var p = v.play();
+    if (p && p.catch) p.catch(fallback);
+    setTimeout(function () { if (!done && v.paused) fallback(); }, 5000);
   }
 
   /* ---------------- kalkulator i upit ---------------- */
@@ -1033,6 +1067,15 @@
   }
   function showLb(dir) {
     var list = gItems(), g = list[lb.i], stage = lb.el.querySelector('.lb-stage');
+    if (g.video) {
+      /* video: krene odmah (bez zvuka), vrti se u krug; ako ne može da se pusti, ostaje početna slika */
+      stage.innerHTML = '<div class="lb-art lb-photo' + (dir ? (dir > 0 ? ' from-r' : ' from-l') : '') + '"><video src="' + esc(g.video) + '" poster="' + esc(g.poster) + '" muted loop playsinline autoplay preload="auto" aria-label="' + esc(L(g.label)) + '"></video></div>';
+      var vp = stage.querySelector('video').play();
+      if (vp && vp.catch) vp.catch(function () {});
+      lb.el.querySelector('.lb-cap').textContent = L(g.label);
+      lb.el.querySelector('.lb-count').textContent = (lb.i + 1) + ' / ' + list.length;
+      return;
+    }
     stage.innerHTML = '<div class="lb-art' + (g.image ? ' lb-photo' : '') + (dir ? (dir > 0 ? ' from-r' : ' from-l') : '') + '">' + sceneOrImage(g, '', '100vw') + '</div>';
     lb.el.querySelector('.lb-cap').textContent = L(g.label);
     lb.el.querySelector('.lb-count').textContent = (lb.i + 1) + ' / ' + list.length;
