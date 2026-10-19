@@ -37,8 +37,11 @@ window.VIKENDICA = {
     { image: 'assets/img/a1-krevet.webp', thumb: 'assets/img/a1-krevet-800.webp', label: { bs: 'Bračni krevet', en: 'Double bed', de: 'Doppelbett' } }
   ],
   /* prava slika za prvi ekran (uspravna za mobitel) i heroImageWide za laptop; null = ilustracija. Video: heroVideo, heroVideoWebm, heroPoster */
-  heroImage: 'assets/img/kuca-sprijeda-800.webp',
-  heroImageWide: 'assets/img/hero-siroko.webp',
+  heroImage: 'assets/img/hero-mobitel.webp',
+  heroImageWide: 'assets/img/hero-laptop.webp',
+  /* bez prekidača zima/ljeto i bez pahulja i listića preko fotografije */
+  seasons: false,
+  effects: false,
   /* crtež kuće na prvom ekranu: 'house' = kuća sa strmim krovom kao prava Casa Montana, inače A-frame vikendica */
   houseStyle: 'house',
   /* istaknuto na prvom ekranu */
@@ -156,8 +159,8 @@ window.VIKENDICA = {
     eyebrow: { bs: 'Pogled', en: 'The view', de: 'Die Aussicht' },
     title: { bs: 'Jutro uz planinu', en: 'Mornings with a mountain view', de: 'Morgens mit Blick auf die Berge' },
     images: [
-      { image: 'assets/img/pogled-balkon.webp', thumb: 'assets/img/pogled-balkon-800.webp', label: { bs: 'Pogled sa balkona', en: 'View from the balcony', de: 'Blick vom Balkon' } },
-      { image: 'assets/img/pogled-prozor.webp', thumb: 'assets/img/pogled-prozor-800.webp', label: { bs: 'Jutro uz pogled na šumu', en: 'Morning with a forest view', de: 'Morgen mit Blick auf den Wald' } }
+      { image: 'assets/img/pogled-prozor.webp', thumb: 'assets/img/pogled-prozor-800.webp', label: { bs: 'Jutro uz pogled na šumu', en: 'Morning with a forest view', de: 'Morgen mit Blick auf den Wald' } },
+      { image: 'assets/img/kuca-zabat.webp', thumb: 'assets/img/kuca-zabat-800.webp', label: { bs: 'Balkoni', en: 'Balconies', de: 'Balkone' } }
     ],
     text: {
       bs: ['Otvorite balkonska vrata i ispred vas su jele, šuma i vrhovi Vlašića.', 'Jutarnja kafa na balkonu, svjež planinski zrak i tišina. Upravo zbog toga ljudi dolaze na planinu.'],

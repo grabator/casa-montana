@@ -158,7 +158,7 @@
       '<canvas class="fx" aria-hidden="true"></canvas>' +
       '<div class="hero-shade" aria-hidden="true"></div>' +
       '<div class="wrap hero-in"><div class="hero-top">' +
-      '<p class="badge reveal">' + ic(season === 'winter' ? 'snow' : 'sun') + esc(L(D.badge) || t('heroBadge')) + ' · ' + esc(D.place) + '</p>' +
+      '<p class="badge reveal">' + ic(!SEASONS ? 'pin' : season === 'winter' ? 'snow' : 'sun') + esc(L(D.badge) || t('heroBadge')) + ' · ' + esc(D.place) + '</p>' +
       heroTitle() +
       '<p class="hero-tag reveal">' + esc(L(D.tagline)) + '</p></div>' +
       (D.heroChips && D.heroChips.length ? '<ul class="hero-chips reveal" aria-label="' + esc(t('factsTitle')) + '">' + D.heroChips.map(function (c, i) {
@@ -651,6 +651,7 @@
     root.lang = lang;
     root.setAttribute('data-season', season);
     root.classList.toggle('no-seasons', !SEASONS);
+    root.classList.toggle('has-photo', !!D.heroImage);
     if (D.theme) Object.keys(D.theme).forEach(function (k) { root.style.setProperty('--' + k, D.theme[k]); });
     document.title = L(D.title) + ' | ' + L(D.tagline);
     var md = document.querySelector('meta[name="description"]');
@@ -670,7 +671,7 @@
     loadWeather();
     observeReveal();
     Spy.start();
-    FX.start(document.querySelector('.fx'));
+    if (D.effects !== false) FX.start(document.querySelector('.fx'));
   }
 
   /* ---------------- kalkulator i upit ---------------- */
@@ -1030,7 +1031,7 @@
   }
   function showLb(dir) {
     var list = gItems(), g = list[lb.i], stage = lb.el.querySelector('.lb-stage');
-    stage.innerHTML = '<div class="lb-art' + (dir ? (dir > 0 ? ' from-r' : ' from-l') : '') + '">' + sceneOrImage(g, '', '100vw') + '</div>';
+    stage.innerHTML = '<div class="lb-art' + (g.image ? ' lb-photo' : '') + (dir ? (dir > 0 ? ' from-r' : ' from-l') : '') + '">' + sceneOrImage(g, '', '100vw') + '</div>';
     lb.el.querySelector('.lb-cap').textContent = L(g.label);
     lb.el.querySelector('.lb-count').textContent = (lb.i + 1) + ' / ' + list.length;
   }
