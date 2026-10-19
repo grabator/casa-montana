@@ -26,11 +26,16 @@ window.VIKENDICA = {
   /* demo: true = napomena u footeru i stranica sakrivena od Googlea (za objavu: false i obrisati noindex u index.html) */
   demo: true,
   demoNote: {
-    bs: 'Pregled stranice u izradi. Prave fotografije i kontakt podaci uskoro.',
-    en: 'Website preview in progress. Real photos and contact details coming soon.',
-    de: 'Vorschau der Website in Arbeit. Echte Fotos und Kontaktdaten folgen in Kürze.'
+    bs: 'Pregled stranice u izradi. Ostale fotografije i kontakt podaci uskoro.',
+    en: 'Website preview in progress. More photos and contact details coming soon.',
+    de: 'Vorschau der Website in Arbeit. Weitere Fotos und Kontaktdaten folgen in Kürze.'
   },
   credit: null,
+  /* "O nama": velika i mala slika */
+  aboutImages: [
+    { image: 'assets/img/a1-sto.webp', thumb: 'assets/img/a1-sto-800.webp', label: { bs: 'Postavljen sto', en: 'Table set for dinner', de: 'Gedeckter Tisch' } },
+    { image: 'assets/img/a1-krevet.webp', thumb: 'assets/img/a1-krevet-800.webp', label: { bs: 'Bračni krevet', en: 'Double bed', de: 'Doppelbett' } }
+  ],
   /* prava slika za prvi ekran (npr. 'assets/img/kuca.webp'); null = ilustracija. Video: heroVideo, heroVideoWebm, heroPoster */
   heroImage: null,
   /* crtež kuće na prvom ekranu: 'house' = kuća sa strmim krovom kao prava Casa Montana, inače A-frame vikendica */
@@ -58,22 +63,26 @@ window.VIKENDICA = {
     { icon: 'pin', label: { bs: 'centar Babanovca', en: 'centre of Babanovac', de: 'Zentrum von Babanovac' } }
   ],
 
-  /* --- galerija: ilustracije dok ne stignu prave slike ({ image: 'assets/img/x.webp', label: {...} }) --- */
+  /* --- galerija: prave fotografije Apartmana 1 (1600px + manja -800 verzija); Apartman 2 dodati kad stignu slike --- */
   gallery: [
-    { scene: 'exterior', label: { bs: 'Casa Montana', en: 'Casa Montana', de: 'Casa Montana' } },
-    { scene: 'lounge', label: { bs: 'Dnevna soba', en: 'Living room', de: 'Wohnzimmer' } },
-    { scene: 'living', label: { bs: 'Večer uz kamin', en: 'An evening by the fire', de: 'Abend am Kamin' } },
-    { scene: 'bedroom', label: { bs: 'Spavaća soba', en: 'Bedroom', de: 'Schlafzimmer' } },
-    { scene: 'kitchen', label: { bs: 'Kuhinja', en: 'Kitchen', de: 'Küche' } },
-    { scene: 'bathModern', label: { bs: 'Kupatilo', en: 'Bathroom', de: 'Badezimmer' } },
-    { scene: 'view', label: { bs: 'Pogled na planinu', en: 'Mountain view', de: 'Blick auf die Berge' } }
+    { image: 'assets/img/a1-dnevna.webp', thumb: 'assets/img/a1-dnevna-800.webp', label: { bs: 'Dnevna soba', en: 'Living room', de: 'Wohnzimmer' } },
+    { image: 'assets/img/a1-trpezarija.webp', thumb: 'assets/img/a1-trpezarija-800.webp', label: { bs: 'Trpezarija uz kamin', en: 'Dining area by the fireplace', de: 'Essbereich am Kamin' } },
+    { image: 'assets/img/a1-sofa.webp', thumb: 'assets/img/a1-sofa-800.webp', label: { bs: 'Ugaona garnitura', en: 'Corner sofa', de: 'Ecksofa' } },
+    { image: 'assets/img/a1-kamin.webp', thumb: 'assets/img/a1-kamin-800.webp', label: { bs: 'Kamin', en: 'Fireplace', de: 'Kamin' } },
+    { image: 'assets/img/a1-zid.webp', thumb: 'assets/img/a1-zid-800.webp', label: { bs: 'Detalji', en: 'Details', de: 'Details' } },
+    { image: 'assets/img/a1-spavaca.webp', thumb: 'assets/img/a1-spavaca-800.webp', label: { bs: 'Spavaća soba', en: 'Bedroom', de: 'Schlafzimmer' } },
+    { image: 'assets/img/a1-krevet.webp', thumb: 'assets/img/a1-krevet-800.webp', label: { bs: 'Bračni krevet', en: 'Double bed', de: 'Doppelbett' } },
+    { image: 'assets/img/a1-kuhinja.webp', thumb: 'assets/img/a1-kuhinja-800.webp', label: { bs: 'Kuhinja', en: 'Kitchen', de: 'Küche' } },
+    { image: 'assets/img/a1-kupatilo.webp', thumb: 'assets/img/a1-kupatilo-800.webp', label: { bs: 'Kupatilo', en: 'Bathroom', de: 'Badezimmer' } },
+    { image: 'assets/img/a1-tv.webp', thumb: 'assets/img/a1-tv-800.webp', label: { bs: 'Kutak sa TV-om', en: 'TV corner', de: 'TV-Ecke' } },
+    { image: 'assets/img/a1-sto.webp', thumb: 'assets/img/a1-sto-800.webp', label: { bs: 'Postavljen sto', en: 'Table set for dinner', de: 'Gedeckter Tisch' } }
   ],
 
   /* --- apartmani (od vlasnika): Apartman 1 do 4 osobe, Apartman 2 do 10 osoba, cijela vikendica do 14 osoba.
-     Slike stižu za 5-6 dana; do tada ilustracije. Raspored kreveta dodati kad ga pošalju. --- */
+     Apartman 1 ima prave slike, Apartman 2 i cijela vikendica još ilustracije. Raspored kreveta dodati kad ga pošalju. --- */
   rooms: [
     {
-      scene: 'lounge', guests: 4,
+      scene: 'lounge', image: 'assets/img/a1-dnevna.webp', thumb: 'assets/img/a1-dnevna-800.webp', label: { bs: 'Apartman 1, dnevna soba', en: 'Apartment 1, living room', de: 'Ferienwohnung 1, Wohnzimmer' }, guests: 4,
       title: { bs: 'Apartman 1', en: 'Apartment 1', de: 'Ferienwohnung 1' },
       beds: { bs: 'Za par ili manju porodicu', en: 'For a couple or a small family', de: 'Für Paare oder kleine Familien' },
       text: { bs: 'Dnevna soba, kuhinja, spavaća soba i moderno kupatilo. Topao i miran apartman za vikend u dvoje ili porodični odmor.', en: 'Living room, kitchen, bedroom and a modern bathroom. A warm, quiet apartment for a weekend for two or a family break.', de: 'Wohnzimmer, Küche, Schlafzimmer und ein modernes Bad. Eine warme, ruhige Wohnung für ein Wochenende zu zweit oder einen Familienurlaub.' }
@@ -136,7 +145,7 @@ window.VIKENDICA = {
     msgRoom: { bs: 'Apartman: {r}.', en: 'Apartment: {r}.', de: 'Ferienwohnung: {r}.' },
     aboutTitle: { bs: 'O nama', en: 'About us', de: 'Über uns' },
     guideRooms: { bs: { one: '{n} apartman', few: '{n} apartmana', other: '{n} apartmana' }, en: { one: '{n} apartment', other: '{n} apartments' }, de: { one: '{n} Ferienwohnung', other: '{n} Ferienwohnungen' } },
-    galleryLead: { bs: 'Pogledajte svaki kutak Casa Montane. Prave fotografije stižu uskoro.', en: 'Take a look around Casa Montana. Real photos coming soon.', de: 'Werfen Sie einen Blick in jede Ecke von Casa Montana. Echte Fotos folgen in Kürze.' },
+    galleryLead: { bs: 'Pogledajte Apartman 1. Fotografije Apartmana 2 stižu uskoro.', en: 'Take a look around Apartment 1. Photos of Apartment 2 coming soon.', de: 'Sehen Sie sich Ferienwohnung 1 an. Fotos von Ferienwohnung 2 folgen in Kürze.' },
     amenitiesLead: { bs: 'Sve što treba za ugodan boravak.', en: 'Everything you need for a comfortable stay.', de: 'Alles für einen angenehmen Aufenthalt.' }
   },
 

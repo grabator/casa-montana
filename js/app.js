@@ -70,8 +70,9 @@
     if (lang === 'de') return d.getDate() + '. ' + ['Jan.', 'Feb.', 'März', 'Apr.', 'Mai', 'Juni', 'Juli', 'Aug.', 'Sept.', 'Okt.', 'Nov.', 'Dez.'][d.getMonth()] + ' ' + d.getFullYear();
     return d.getDate() + '. ' + (d.getMonth() + 1) + '. ' + d.getFullYear() + '.';
   }
-  function sceneOrImage(item, cls) {
-    if (item.image) return '<img src="' + esc(item.image) + '" alt="' + esc(L(item.label)) + '" loading="lazy" decoding="async" class="' + (cls || '') + '">';
+  /* item.thumb (manja verzija) = srcset, sizes je širina na ekranu (galerija i kartice ~pola ekrana, lightbox cijeli) */
+  function sceneOrImage(item, cls, sizes) {
+    if (item.image) return '<img src="' + esc(item.image) + '"' + (item.thumb ? ' srcset="' + esc(item.thumb) + ' 800w, ' + esc(item.image) + ' 1600w" sizes="' + (sizes || '(min-width: 900px) 34vw, 50vw') + '"' : '') + ' alt="' + esc(L(item.label)) + '" loading="lazy" decoding="async" class="' + (cls || '') + '">';
     return SC[item.scene] ? SC[item.scene]() : '';
   }
   function section(id, eyebrow, title, lead, body, cls) {
@@ -981,7 +982,7 @@
   }
   function showLb(dir) {
     var g = D.gallery[lb.i], stage = lb.el.querySelector('.lb-stage');
-    stage.innerHTML = '<div class="lb-art' + (dir ? (dir > 0 ? ' from-r' : ' from-l') : '') + '">' + sceneOrImage(g) + '</div>';
+    stage.innerHTML = '<div class="lb-art' + (dir ? (dir > 0 ? ' from-r' : ' from-l') : '') + '">' + sceneOrImage(g, '', '100vw') + '</div>';
     lb.el.querySelector('.lb-cap').textContent = L(g.label);
     lb.el.querySelector('.lb-count').textContent = (lb.i + 1) + ' / ' + D.gallery.length;
   }
