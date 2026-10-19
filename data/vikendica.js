@@ -115,19 +115,19 @@ window.VIKENDICA = {
      Sve tri kartice imaju prave slike. Raspored kreveta dodati kad ga pošalju. --- */
   rooms: [
     {
-      scene: 'lounge', image: 'assets/img/a1-dnevna.webp', thumb: 'assets/img/a1-dnevna-800.webp', label: { bs: 'Apartman 1, dnevna soba', en: 'Apartment 1, living room', de: 'Ferienwohnung 1, Wohnzimmer' }, guests: 4,
+      gallery: 'a1', scene: 'lounge', image: 'assets/img/a1-dnevna.webp', thumb: 'assets/img/a1-dnevna-800.webp', label: { bs: 'Apartman 1, dnevna soba', en: 'Apartment 1, living room', de: 'Ferienwohnung 1, Wohnzimmer' }, guests: 4,
       title: { bs: 'Apartman 1', en: 'Apartment 1', de: 'Ferienwohnung 1' },
       beds: { bs: 'Za par ili manju porodicu', en: 'For a couple or a small family', de: 'Für Paare oder kleine Familien' },
       text: { bs: 'Dnevna soba, kuhinja, spavaća soba i moderno kupatilo. Topao i miran apartman za vikend u dvoje ili porodični odmor.', en: 'Living room, kitchen, bedroom and a modern bathroom. A warm, quiet apartment for a weekend for two or a family break.', de: 'Wohnzimmer, Küche, Schlafzimmer und ein modernes Bad. Eine warme, ruhige Wohnung für ein Wochenende zu zweit oder einen Familienurlaub.' }
     },
     {
-      scene: 'living', image: 'assets/img/a2-boravak.webp', thumb: 'assets/img/a2-boravak-800.webp', label: { bs: 'Apartman 2, dnevni boravak', en: 'Apartment 2, living room', de: 'Ferienwohnung 2, Wohnzimmer' }, guests: 10,
+      gallery: 'a2', scene: 'living', image: 'assets/img/a2-boravak.webp', thumb: 'assets/img/a2-boravak-800.webp', label: { bs: 'Apartman 2, dnevni boravak', en: 'Apartment 2, living room', de: 'Ferienwohnung 2, Wohnzimmer' }, guests: 10,
       title: { bs: 'Apartman 2', en: 'Apartment 2', de: 'Ferienwohnung 2' },
       beds: { bs: 'Za veću porodicu ili društvo', en: 'For a bigger family or a group of friends', de: 'Für größere Familien oder Freundesgruppen' },
       text: { bs: 'Prostran apartman na dva nivoa: dnevni boravak sa kaminom, trpezarija sa velikim stolom, kuhinja i spavaća soba, a gore potkrovlje sa krevetima pod krovom i izlazom na balkon.', en: 'A spacious apartment on two levels: a living room with a fireplace, a dining area with a big table, a kitchen and a bedroom, plus an attic with beds under the roof and a door to the balcony.', de: 'Eine geräumige Wohnung auf zwei Ebenen: Wohnzimmer mit Kamin, Essbereich mit großem Tisch, Küche und Schlafzimmer, dazu ein Dachgeschoss mit Betten unter dem Dach und Zugang zum Balkon.' }
     },
     {
-      scene: 'exterior', image: 'assets/img/kuca-strana.webp', thumb: 'assets/img/kuca-strana-800.webp', label: { bs: 'Casa Montana izvana', en: 'Casa Montana from outside', de: 'Casa Montana von außen' }, guests: 14,
+      gallery: 'out', scene: 'exterior', image: 'assets/img/kuca-strana.webp', thumb: 'assets/img/kuca-strana-800.webp', label: { bs: 'Casa Montana izvana', en: 'Casa Montana from outside', de: 'Casa Montana von außen' }, guests: 14,
       title: { bs: 'Cijela vikendica', en: 'The whole house', de: 'Das ganze Haus' },
       beds: { bs: 'Oba apartmana, samo za vas', en: 'Both apartments, just for you', de: 'Beide Wohnungen, nur für Sie' },
       text: { bs: 'Cijela Casa Montana bez drugih gostiju: za velike porodice, proslave i zimovanja sa prijateljima.', en: 'All of Casa Montana with no other guests: for large families, celebrations and winter trips with friends.', de: 'Die ganze Casa Montana ohne andere Gäste: für große Familien, Feiern und Winterurlaub mit Freunden.' }
@@ -189,6 +189,7 @@ window.VIKENDICA = {
     'nav.about': { bs: 'O nama', en: 'About', de: 'Über uns' },
     roomsTitle: { bs: 'Apartmani', en: 'Apartments', de: 'Ferienwohnungen' },
     askRoom: { bs: 'Pitaj za ovaj apartman', en: 'Ask about this apartment', de: 'Nach dieser Wohnung fragen' },
+    roomPhotos: { bs: 'Slike', en: 'Photos', de: 'Fotos' },
     roomType: { bs: 'Apartman', en: 'Apartment', de: 'Ferienwohnung' },
     msgRoom: { bs: 'Apartman: {r}.', en: 'Apartment: {r}.', de: 'Ferienwohnung: {r}.' },
     aboutTitle: { bs: 'O nama', en: 'About us', de: 'Über uns' },

@@ -231,7 +231,8 @@
         '<div class="room-body"><h3>' + esc(L(r.title)) + '</h3>' +
         '<p class="room-beds">' + ic('bed') + esc(L(r.beds)) + (r.guests ? ' · <span class="nw">' + ic('guests') + esc(t('upToGuests', { n: r.guests })) + '</span>' : '') + '</p>' +
         (r.text ? '<p class="room-text">' + esc(L(r.text)) + '</p>' : '') +
-        '<a class="btn btn-small btn-outline" href="#calc" data-room="' + i + '">' + esc(t('askRoom')) + ic('arrow') + '</a></div></li>';
+        '<div class="room-acts">' + (r.gallery ? '<a class="btn btn-small btn-ghost-dark" href="#gallery" data-gal="' + esc(r.gallery) + '">' + ic('image') + esc(t('roomPhotos')) + '</a>' : '') +
+        '<a class="btn btn-small btn-outline" href="#calc" data-room="' + i + '">' + esc(t('askRoom')) + ic('arrow') + '</a></div></div></li>';
     }).join('') + '</ul>';
     return section('rooms', null, t('roomsTitle'), L(D.roomsLead) || t('roomsLead'), body);
   }
@@ -1156,6 +1157,14 @@
       form.room = rb.getAttribute('data-room');
       var ddr = document.getElementById('dd-r'), opt = ddr && ddr.querySelector('li[data-v="' + form.room + '"]');
       if (opt) { ddr.setAttribute('data-value', form.room); ddr.querySelector('.dd-val').textContent = opt.textContent; ddr.querySelectorAll('li').forEach(function (x) { x.setAttribute('aria-selected', String(x === opt)); }); }
+    }
+    /* "Slike" na kartici apartmana: otvori pravi tab galerije i odvedi gore do slika */
+    var gl = e.target.closest('[data-gal]');
+    if (gl) {
+      e.preventDefault();
+      setGTab(gl.getAttribute('data-gal'));
+      document.getElementById('gallery').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+      return;
     }
     var gt = e.target.closest('[data-gtab]');
     if (gt) { setGTab(gt.getAttribute('data-gtab')); return; }

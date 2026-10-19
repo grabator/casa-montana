@@ -868,10 +868,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .lbl-long { display: none; } .lbl-short { display: inline; }
   .hero-chips li { padding: 6px 11px; font-size: 0.8125rem; gap: 6px; }
   .hero-chips .ic { width: 16px; height: 16px; }
-  /* apartmani: listaju se u stranu, vidi se dio sljedećeg */
-  .rooms { grid-auto-flow: column; grid-auto-columns: 84%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: -16px; padding: 4px 16px 18px; scroll-padding-inline: 16px; scrollbar-width: none; }
-  .rooms::-webkit-scrollbar { display: none; }
-  .room { scroll-snap-align: start; }
+  /* apartmani: jedan ispod drugog (bez listanja u stranu, da ništa ne hvata prst dok se lista stranica) */
+  .rooms { gap: 14px; }
   .room-art { aspect-ratio: 16 / 10; }
   .room-body { padding: 16px 18px 18px; gap: 8px; }
   .room-body h3 { font-size: 1.3rem; }
@@ -1041,4 +1039,15 @@ button, input, select, textarea { font: inherit; color: inherit; }
 @media (max-width: 639px) and (max-height: 700px) {
   .guide-side:not(.guide-extra) { display: none; }
   .gd-txt small, .gd-feat .gd-txt small { display: none; }
+}
+
+/* kartica apartmana: dugmad Slike i Pitaj u jednom redu */
+.room-acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.room-acts .btn { flex: 1 1 auto; justify-content: center; }
+.room-acts .btn:first-child:not(:last-child) { flex: 0 0 auto; }
+.btn-ghost-dark { background: var(--bg-alt); color: var(--ink); border: 1px solid var(--line); }
+.btn-ghost-dark .ic { width: 18px; height: 18px; }
+@media (max-width: 639px) {
+  .room-acts { flex-wrap: nowrap; }
+  .room-acts .btn { padding: 0 12px; font-size: 0.8125rem; white-space: nowrap; gap: 6px; }
 }
