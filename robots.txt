@@ -1,4 +1,3 @@
-# Stranica ima "noindex" u index.html dok ne stignu pravi kontakt podaci. Vidi README, "SEO".
 User-agent: *
 Allow: /
 

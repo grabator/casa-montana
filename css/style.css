@@ -332,6 +332,20 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .contact-card:hover { transform: translateY(-2px); border-color: var(--accent); }
 .contact-card .ic { width: 28px; height: 28px; color: var(--accent-ink); }
 .contact-card span { display: grid; } .contact-card small { color: var(--muted); font-size: 0.875rem; }
+.num-card { padding: 16px 18px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); }
+.num-head { display: flex; align-items: center; gap: 14px; }
+.num-head .ic { width: 28px; height: 28px; color: var(--accent-ink); }
+.num-head span { display: grid; } .num-head a { color: var(--muted); font-size: 0.875rem; text-decoration: none; }
+.num-acts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+.num-act { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 8px; border-radius: 12px; text-decoration: none; font-weight: 800; font-size: 0.8125rem; background: var(--bg-alt); white-space: nowrap; transition: transform 0.2s; }
+.num-act:hover { transform: translateY(-2px); }
+.num-act .ic { width: 18px; height: 18px; flex: none; }
+.num-viber { background: #7360f2; color: #fff; } .num-wa { background: #25d366; color: #0b2e17; }
+.num-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 4px 0 8px; }
+.num-pick-l { width: 100%; font-weight: 700; font-size: 0.875rem; }
+.num-pick button { flex: 1 1 140px; display: grid; gap: 2px; padding: 10px 14px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--card); color: inherit; text-align: left; cursor: pointer; font: inherit; transition: border-color 0.2s, box-shadow 0.2s; }
+.num-pick button b { font-size: 0.875rem; } .num-pick button small { color: var(--muted); font-size: 0.8125rem; }
+.num-pick button[aria-checked='true'] { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
 
 /* footer */
 .foot { background: var(--accent-2); color: #efece2; padding: 40px 0 calc(110px + env(safe-area-inset-bottom)); }

@@ -317,6 +317,9 @@
       '<li data-need="phone">' + ic('check') + esc(t('needPhoneItem')) + '</li></ul>' +
       '<p class="need-why">' + esc(t('needWhy')) + '</p></div>' +
       '<p class="form-err" id="inq-err" role="alert"></p>' +
+      (nums().length > 1 ? '<div class="num-pick" role="radiogroup" aria-label="' + esc(t('sendTo')) + '"><span class="num-pick-l">' + esc(t('sendTo')) + '</span>' + nums().map(function (n, i) {
+        return '<button type="button" role="radio" aria-checked="' + (i === 0) + '" data-num="' + i + '"><b>' + esc(L(n.label)) + '</b><small>' + esc(n.phone) + '</small></button>';
+      }).join('') + '</div>' : '') +
       '<div class="inq-btns"><a class="btn btn-viber" id="send-viber" href="#">' + ic('viber') + '<span class="lbl-long">' + esc(t('sendViber')) + '</span><span class="lbl-short">' + esc(t('viber')) + '</span></a>' +
       '<a class="btn btn-wa" id="send-wa" href="#" target="_blank" rel="noopener">' + ic('whatsapp') + '<span class="lbl-long">' + esc(t('sendWhatsapp')) + '</span><span class="lbl-short">' + esc(t('whatsapp')) + '</span></a></div>' +
       '<p class="muted small">' + esc(t('inquiryNote')) + '</p></form></div>';
@@ -389,18 +392,30 @@
     return section('faq', null, t('faqTitle'), null, body, 'sec-alt');
   }
 
+  /* brojevi telefona: D.contact.numbers (ili stari oblik phone/viber/whatsapp); na njemačkoj verziji prvi je njemački broj */
+  function nums() {
+    var c = D.contact || {}, n = (c.numbers || (c.phone ? [c] : [])).slice();
+    if (lang === 'de') n.sort(function (a, b) { return (b.id === 'de') - (a.id === 'de'); });
+    return n;
+  }
+  function viberUrl(n, text) { return 'viber://chat?number=' + encodeURIComponent(n.viber) + (text ? '&draft=' + encodeURIComponent(text) : ''); }
+  function waUrl(n, text) { return 'https://wa.me/' + n.whatsapp + (text ? '?text=' + encodeURIComponent(text) : ''); }
+
   function contact() {
     var c = D.contact;
+    var numCards = nums().map(function (n, i) {
+      return '<li class="reveal num-card" style="--d:' + i + '"><div class="num-head">' + ic('phone') + '<span><b>' + esc(L(n.label) || t('call')) + '</b><a href="tel:' + esc(n.phone.replace(/\s/g, '')) + '">' + esc(n.phone) + '</a></span></div>' +
+        '<div class="num-acts"><a class="num-act" href="tel:' + esc(n.phone.replace(/\s/g, '')) + '">' + ic('phone') + esc(t('call')) + '</a>' +
+        '<a class="num-act num-viber" href="' + esc(viberUrl(n)) + '">' + ic('viber') + esc(t('viber')) + '</a>' +
+        '<a class="num-act num-wa" href="' + esc(waUrl(n)) + '" target="_blank" rel="noopener">' + ic('whatsapp') + esc(t('whatsapp')) + '</a></div></li>';
+    }).join('');
     var links = [
-      ['phone', t('call'), 'tel:' + c.phone.replace(/\s/g, ''), c.phone],
-      ['viber', t('viber'), 'viber://chat?number=' + encodeURIComponent(c.viber), c.phone],
-      ['whatsapp', t('whatsapp'), 'https://wa.me/' + c.whatsapp, c.phone],
       ['mail', t('email'), 'mailto:' + c.email, c.email],
       ['insta', t('instagram'), 'https://instagram.com/' + c.instagram, '@' + c.instagram]
     ].filter(function (l) { return l[3] && !/undefined/.test(l[2]); }).map(function (l, i) {
-      return '<li class="reveal" style="--d:' + i + '"><a class="contact-card spot" href="' + esc(l[2]) + '"' + (/^https/.test(l[2]) ? ' target="_blank" rel="noopener"' : '') + '>' + ic(l[0]) + '<span><b>' + esc(l[1]) + '</b><small>' + esc(l[3]) + '</small></span></a></li>';
+      return '<li class="reveal" style="--d:' + (i + 2) + '"><a class="contact-card spot" href="' + esc(l[2]) + '"' + (/^https/.test(l[2]) ? ' target="_blank" rel="noopener"' : '') + '>' + ic(l[0]) + '<span><b>' + esc(l[1]) + '</b><small>' + esc(l[3]) + '</small></span></a></li>';
     }).join('');
-    return section('contact', null, t('contactTitle'), t('contactLead'), '<ul class="contact-grid">' + links + '</ul>');
+    return section('contact', null, t('contactTitle'), t('contactLead'), '<ul class="contact-grid">' + numCards + links + '</ul>');
   }
 
   function footer() {
@@ -416,9 +431,9 @@
   }
 
   function dock() {
-    var c = D.contact;
+    var c = nums()[0];
     return '<a class="dock-btn" href="tel:' + esc(c.phone.replace(/\s/g, '')) + '">' + ic('phone') + esc(t('call')) + '</a>' +
-      '<a class="dock-btn dock-viber" href="viber://chat?number=' + encodeURIComponent(c.viber) + '">' + ic('viber') + esc(t('viber')) + '</a>' +
+      '<a class="dock-btn dock-viber" href="' + esc(viberUrl(c)) + '">' + ic('viber') + esc(t('viber')) + '</a>' +
       '<a class="dock-btn dock-cta" href="#calc">' + ic('calendar') + '<span>' + esc(t('dockCta')) + '</span></a>';
   }
 
@@ -441,12 +456,12 @@
         return t('guideReviews', { r: (sum / D.reviews.length).toFixed(1).replace('.', lang === 'en' ? '.' : ',') });
       case 'faq': return plural(t('guideFaq'), D.faq.length);
       case 'instagram': return '@' + c.instagram;
-      case 'contact': return c.phone || '';
+      case 'contact': return nums().map(function (n) { return n.phone; }).join(' · ');
     }
     return '';
   }
   function guideHtml() {
-    var c = D.contact || {};
+    var c = nums()[0] || {};
     var secs = [].slice.call(document.querySelectorAll('#main section.sec[id]'));
     var calc = secs.filter(function (x) { return x.id === 'calc'; });
     secs = calc.concat(secs.filter(function (x) { return x.id !== 'calc'; }));
@@ -460,8 +475,8 @@
     }).join('');
     var quick = [
       c.phone ? '<a class="gd-q" href="tel:' + esc(c.phone.replace(/\s/g, '')) + '">' + ic('phone') + '<span>' + esc(t('call')) + '</span></a>' : '',
-      c.viber ? '<a class="gd-q gd-q-viber" href="viber://chat?number=' + encodeURIComponent(c.viber) + '">' + ic('viber') + '<span>' + esc(t('viber')) + '</span></a>' : '',
-      c.whatsapp ? '<a class="gd-q gd-q-wa" href="https://wa.me/' + esc(c.whatsapp) + '" target="_blank" rel="noopener">' + ic('whatsapp') + '<span>' + esc(t('whatsapp')) + '</span></a>' : ''
+      c.viber ? '<a class="gd-q gd-q-viber" href="' + esc(viberUrl(c)) + '">' + ic('viber') + '<span>' + esc(t('viber')) + '</span></a>' : '',
+      c.whatsapp ? '<a class="gd-q gd-q-wa" href="' + esc(waUrl(c)) + '" target="_blank" rel="noopener">' + ic('whatsapp') + '<span>' + esc(t('whatsapp')) + '</span></a>' : ''
     ].join('');
     return '<div class="guide-bg" aria-hidden="true"><svg viewBox="0 0 1200 300" preserveAspectRatio="none"><path class="gb-1" d="M0 300V190l120-70 90 50 140-110 120 90 110-60 160 120 130-80 140 70 190-100v200z"/><path class="gb-2" d="M0 300V240l160-60 120 40 150-80 130 70 170-50 140 60 160-70 170 50v100z"/></svg></div>' +
       '<div class="guide-in">' +
@@ -734,11 +749,16 @@
         return;
       }
       err.textContent = '';
-      var msg = message(), c = D.contact;
-      e.currentTarget.href = kind === 'viber'
-        ? 'viber://chat?number=' + encodeURIComponent(c.viber) + '&draft=' + encodeURIComponent(msg.text)
-        : 'https://wa.me/' + c.whatsapp + '?text=' + encodeURIComponent(msg.text);
+      var msg = message(), c = nums()[numPick] || nums()[0];
+      e.currentTarget.href = kind === 'viber' ? viberUrl(c, msg.text) : waUrl(c, msg.text);
     }
+    var numPick = 0;
+    document.querySelectorAll('.num-pick button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        numPick = +b.getAttribute('data-num');
+        document.querySelectorAll('.num-pick button').forEach(function (x) { x.setAttribute('aria-checked', String(x === b)); });
+      });
+    });
     document.getElementById('send-viber').addEventListener('click', function (e) { go('viber', e); });
     document.getElementById('send-wa').addEventListener('click', function (e) { go('wa', e); });
     updateNeed();

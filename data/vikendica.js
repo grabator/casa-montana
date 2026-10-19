@@ -24,7 +24,7 @@ window.VIKENDICA = {
   /* početna sezona: 'auto' (po mjesecu), 'winter' ili 'summer' */
   defaultSeason: 'winter',
   /* demo: true = napomena u footeru i stranica sakrivena od Googlea (za objavu: false i obrisati noindex u index.html) */
-  demo: true,
+  demo: false,
   demoNote: {
     bs: 'Pregled stranice u izradi. Ostale fotografije i kontakt podaci uskoro.',
     en: 'Website preview in progress. More photos and contact details coming soon.',
@@ -47,11 +47,12 @@ window.VIKENDICA = {
     { icon: 'pin', label: { bs: 'Centar Babanovca', en: 'Centre of Babanovac', de: 'Zentrum von Babanovac' } }
   ],
 
-  /* --- kontakt: PRIVREMENO osim Instagrama (vlasnici šalju broj telefona i email) --- */
+  /* --- kontakt: dva broja, oba na Viberu i WhatsAppu. Prvi je glavni (na njemačkoj verziji stranice prvi je njemački broj) --- */
   contact: {
-    phone: '+387 60 000 0000',
-    viber: '+387600000000',
-    whatsapp: '387600000000',
+    numbers: [
+      { id: 'ba', label: { bs: 'Broj u BiH', en: 'Bosnian number', de: 'Nummer in Bosnien' }, phone: '+387 62 429 330', viber: '+38762429330', whatsapp: '38762429330' },
+      { id: 'de', label: { bs: 'Broj u Njemačkoj', en: 'German number', de: 'Nummer in Deutschland' }, phone: '+49 172 9216987', viber: '+491729216987', whatsapp: '491729216987' }
+    ],
     instagram: 'casa.montana.vlasic'
   },
 
@@ -146,6 +147,7 @@ window.VIKENDICA = {
     aboutTitle: { bs: 'O nama', en: 'About us', de: 'Über uns' },
     guideRooms: { bs: { one: '{n} apartman', few: '{n} apartmana', other: '{n} apartmana' }, en: { one: '{n} apartment', other: '{n} apartments' }, de: { one: '{n} Ferienwohnung', other: '{n} Ferienwohnungen' } },
     galleryLead: { bs: 'Pogledajte Apartman 1. Fotografije Apartmana 2 stižu uskoro.', en: 'Take a look around Apartment 1. Photos of Apartment 2 coming soon.', de: 'Sehen Sie sich Ferienwohnung 1 an. Fotos von Ferienwohnung 2 folgen in Kürze.' },
+    sendTo: { bs: 'Pošalji na broj', en: 'Send to', de: 'Senden an' },
     amenitiesLead: { bs: 'Sve što treba za ugodan boravak.', en: 'Everything you need for a comfortable stay.', de: 'Alles für einen angenehmen Aufenthalt.' }
   },
 
