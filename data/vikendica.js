@@ -26,9 +26,9 @@ window.VIKENDICA = {
   /* demo: true = napomena u footeru i stranica sakrivena od Googlea (za objavu: false i obrisati noindex u index.html) */
   demo: true,
   demoNote: {
-    bs: 'Pregled stranice u izradi. Otvaramo 20.10.2026. Prave fotografije i kontakt podaci uskoro.',
-    en: 'Website preview in progress. Opening 20 October 2026. Real photos and contact details coming soon.',
-    de: 'Vorschau der Website in Arbeit. Eröffnung am 20.10.2026. Echte Fotos und Kontaktdaten folgen in Kürze.'
+    bs: 'Pregled stranice u izradi. Prave fotografije i kontakt podaci uskoro.',
+    en: 'Website preview in progress. Real photos and contact details coming soon.',
+    de: 'Vorschau der Website in Arbeit. Echte Fotos und Kontaktdaten folgen in Kürze.'
   },
   credit: null,
   /* prava slika za prvi ekran (npr. 'assets/img/kuca.webp'); null = ilustracija. Video: heroVideo, heroVideoWebm, heroPoster */
@@ -39,9 +39,8 @@ window.VIKENDICA = {
   heroChips: [
     { icon: 'fire', label: { bs: 'Kamin', en: 'Fireplace', de: 'Kamin' } },
     { icon: 'guests', label: { bs: 'Do 14 osoba', en: 'Up to 14 guests', de: 'Bis zu 14 Personen' } },
-    { icon: 'calendar', label: { bs: 'Otvaramo 20.10.', en: 'Opening 20 Oct', de: 'Eröffnung 20.10.' } }
+    { icon: 'pin', label: { bs: 'Centar Babanovca', en: 'Centre of Babanovac', de: 'Zentrum von Babanovac' } }
   ],
-  /* otvaranje (sa Instagrama): poslije 20.10.2026 ovaj red na prvom ekranu treba zamijeniti, npr. sa 'Centar Babanovca' */
 
   /* --- kontakt: PRIVREMENO osim Instagrama (vlasnici šalju broj telefona i email) --- */
   contact: {
