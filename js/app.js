@@ -365,7 +365,8 @@
         return '<button type="button" role="radio" aria-checked="' + (i === 0) + '" data-num="' + i + '"><b>' + esc(L(n.label)) + '</b><small>' + esc(n.phone) + '</small></button>';
       }).join('') + '</div>' : '') +
       '<div class="inq-btns"><a class="btn btn-viber" id="send-viber" href="#">' + ic('viber') + '<span class="lbl-long">' + esc(t('sendViber')) + '</span><span class="lbl-short">' + esc(t('viber')) + '</span></a>' +
-      '<a class="btn btn-wa" id="send-wa" href="#" target="_blank" rel="noopener">' + ic('whatsapp') + '<span class="lbl-long">' + esc(t('sendWhatsapp')) + '</span><span class="lbl-short">' + esc(t('whatsapp')) + '</span></a></div>' +
+      '<a class="btn btn-wa" id="send-wa" href="#" target="_blank" rel="noopener">' + ic('whatsapp') + '<span class="lbl-long">' + esc(t('sendWhatsapp')) + '</span><span class="lbl-short">' + esc(t('whatsapp')) + '</span></a>' +
+      (D.contact.email ? '<a class="btn btn-mail" id="send-mail" href="#">' + ic('mail') + '<span class="lbl-long">' + esc(t('sendEmail')) + '</span><span class="lbl-short">' + esc(t('email')) + '</span></a>' : '') + '</div>' +
       '<p class="muted small">' + esc(t('inquiryNote')) + '</p></form></div>';
     return section('calc', null, t(P ? 'calcTitle' : 'datesTitle'), t(P ? 'calcLead' : 'datesLead'), body, 'sec-alt');
   }
@@ -782,8 +783,9 @@
     if (!box) return;
     box.querySelectorAll('[data-need]').forEach(function (li) { li.classList.toggle('ok', m.indexOf(li.getAttribute('data-need')) === -1); });
     box.classList.toggle('all-ok', !m.length);
-    ['send-viber', 'send-wa'].forEach(function (id) {
+    ['send-viber', 'send-wa', 'send-mail'].forEach(function (id) {
       var b = document.getElementById(id);
+      if (!b) return;
       b.classList.toggle('is-locked', !!m.length);
       b.setAttribute('aria-disabled', String(!!m.length));
     });
@@ -815,7 +817,9 @@
       }
       err.textContent = '';
       var msg = message(), c = nums()[numPick] || nums()[0];
-      e.currentTarget.href = kind === 'viber' ? viberUrl(c, msg.text) : waUrl(c, msg.text);
+      /* email: otvori mail aplikaciju sa popunjenim naslovom i istim tekstom upita */
+      e.currentTarget.href = kind === 'mail' ? 'mailto:' + D.contact.email + '?subject=' + encodeURIComponent(t('mailSubject', { name: D.name })) + '&body=' + encodeURIComponent(msg.text)
+        : kind === 'viber' ? viberUrl(c, msg.text) : waUrl(c, msg.text);
     }
     var numPick = 0;
     document.querySelectorAll('.num-pick button').forEach(function (b) {
@@ -826,6 +830,8 @@
     });
     document.getElementById('send-viber').addEventListener('click', function (e) { go('viber', e); });
     document.getElementById('send-wa').addEventListener('click', function (e) { go('wa', e); });
+    var sm = document.getElementById('send-mail');
+    if (sm) sm.addEventListener('click', function (e) { go('mail', e); });
     updateNeed();
   }
 

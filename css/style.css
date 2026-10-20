@@ -1067,3 +1067,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .gallery-video .g-cap { left: 6px; right: 6px; bottom: 6px; padding: 4px 8px; font-size: 0.6875rem; line-height: 1.25; text-align: center; border-radius: 10px; }
 @media (min-width: 900px) { .gallery-video .g-cap { font-size: 0.8125rem; } .g-play { width: 60px; height: 60px; } .g-play .ic { width: 24px; height: 24px; } }
 .lb-photo video { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+/* upit na email: treće dugme preko cijele širine ispod Viber i WhatsApp */
+.btn-mail { grid-column: 1 / -1; background: var(--card); color: var(--ink); border: 1.5px solid var(--line); }
+.btn-mail .ic { width: 20px; height: 20px; }

@@ -199,6 +199,8 @@ window.VIKENDICA = {
     roomsTitle: { bs: 'Apartmani', en: 'Apartments', de: 'Ferienwohnungen' },
     askRoom: { bs: 'Pitaj za ovaj apartman', en: 'Ask about this apartment', de: 'Nach dieser Wohnung fragen' },
     roomPhotos: { bs: 'Slike', en: 'Photos', de: 'Fotos' },
+    sendEmail: { bs: 'Pošalji upit na email', en: 'Send inquiry by email', de: 'Anfrage per E-Mail senden' },
+    mailSubject: { bs: 'Upit za smještaj, {name}', en: 'Booking inquiry, {name}', de: 'Buchungsanfrage, {name}' },
     videoPlay: { bs: 'Pusti video', en: 'Play video', de: 'Video abspielen' },
     roomType: { bs: 'Apartman', en: 'Apartment', de: 'Ferienwohnung' },
     msgRoom: { bs: 'Apartman: {r}.', en: 'Apartment: {r}.', de: 'Ferienwohnung: {r}.' },
